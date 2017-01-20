@@ -28,7 +28,9 @@ namespace WaterSumo
             float lifetime01 = Mathf.InverseLerp(0f, maxLifetime, currentLifetime);
             currentSize = lifetime01 * maxSize;
 
-            transform.localScale = Vector3.one * currentSize;
+            Vector3 scale = Vector3.one*currentSize;
+            scale.y = 0.1f;
+            transform.localScale = scale;
         }
 
         void Start()
@@ -39,17 +41,38 @@ namespace WaterSumo
         void Update()
         {
             Progress(Time.deltaTime);
+            var colliders = Physics.OverlapSphere(transform.position, transform.TransformVector(Vector3.one*currentSize).magnitude, layerMask);
+
+            foreach (var collider in colliders)
+            {
+                var waveToCollider = collider.transform.position - transform.position;
+                var waveToColliderN = waveToCollider.normalized;
+                var body = collider.GetComponent<Rigidbody>();
+
+                if (body == null)
+                    continue;
+
+                float innerRadius = currentSize - maxSize*waveLength;
+                var capsuleCollider = collider as CapsuleCollider;
+                float affectedByWave = 0f;
+                if (capsuleCollider != null && waveToCollider.magnitude - capsuleCollider.radius > innerRadius)
+                {
+                    affectedByWave = 1f;
+                }
+                body.AddForce(waveToColliderN * pushStrength * affectedByWave, ForceMode.Force);
+            }
         }
 
         void OnValidate()
         {
+            Vector3 scale = new Vector3(1f, 0f, 1f);
             if (outerSphere != null)
             {
-                outerSphere.radius = 1f;
+                outerSphere.transform.localScale = scale * 1f + new Vector3(0f, 0.1f, 0f);
             }
-            if (outerSphere != null)
+            if (innerSphere != null)
             {
-                innerSphere.radius = 1f - waveLength;
+                innerSphere.transform.localScale = scale * (1f - waveLength) + new Vector3(0f, 0.1f, 0f);
             }
         }
 
@@ -62,10 +85,14 @@ namespace WaterSumo
 
         [SerializeField, Range(0f, 1f)]
         private float waveLength = 0.2f;
+        [SerializeField]
+        private float pushStrength = 1f;
+        [SerializeField]
+        private LayerMask layerMask = Physics.AllLayers;
 
         [SerializeField]
-        private SphereCollider innerSphere;
+        private GameObject innerSphere;
         [SerializeField]
-        private SphereCollider outerSphere;
+        private GameObject outerSphere;
     }
 }
