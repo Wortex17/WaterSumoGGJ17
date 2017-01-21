@@ -17,15 +17,17 @@ public class ArenaBehaviour : MonoBehaviour {
 
 	private CapsuleCollider capsuleColl;
 	private BoxCollider boxColl;
+	private Collider coll;
 
 	[SerializeField]
 	private EShape shape;
-	
+
+	[HideInInspector]
+	public GameObject Player;	
 	// Update is called once per frame
 	void Update () {
 
 		ModifyColl ();
-
 	}
 
 	void OnValidate()
@@ -48,6 +50,7 @@ public class ArenaBehaviour : MonoBehaviour {
 			capsuleColl.isTrigger = true;
 			capsuleColl.radius = CapsuleColliderRadius;
 			capsuleColl.height = CapsuleColliderHeight;
+			coll = capsuleColl;
 
 			break;
 		case 1:
@@ -60,16 +63,21 @@ public class ArenaBehaviour : MonoBehaviour {
 			
 			boxColl.isTrigger = true;
 			boxColl.size = new Vector3 (BoxColliderSize, 0.1f, BoxColliderSize);
+			coll = boxColl;
 
 			break;
 		}
 	}
 
-	public float DistanceToBorder(GameObject _player, Collider _coll)
+	public Vector3 DistanceToBorder(GameObject _player)
 	{
-		Vector3 closestPoint = _coll.ClosestPointOnBounds(_player.transform.position);
-		float distance = Vector3.Distance(closestPoint, _player.transform.position);
-		Debug.Log ("Dist" + distance);
+		Vector3 tempPlayerPos = _player.transform.position;
+		tempPlayerPos.y = 0;
+		Vector3 closestPoint = coll.ClosestPointOnBounds(tempPlayerPos * -1);
+		Vector3 distance = closestPoint - tempPlayerPos;
+		// Store Value in of x and z?
+		float x = distance.x;
+		float z = distance.z;
 		return distance;
 	}
 }
