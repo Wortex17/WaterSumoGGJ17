@@ -34,6 +34,7 @@ namespace WaterSumo
             transform.localScale = scale;
         }
 
+        //Fade alpha of inner and outer sphere, then destroy both
         IEnumerator FadeTo(float aValue, float aTime)
         {
             float alphaOuter = outerSphere.GetComponent<Renderer>().material.color.a;

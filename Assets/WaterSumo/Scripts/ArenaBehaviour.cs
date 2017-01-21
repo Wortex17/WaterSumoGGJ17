@@ -21,17 +21,19 @@ public class ArenaBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (GetComponent<CapsuleCollider> () != null)
+        if (GetComponent<CapsuleCollider> () != null)
 		{
 			capsuleColl = GetComponent<CapsuleCollider> ();
 			GOCheck = false;
-		}
+            capsuleColl.isTrigger = true;
+        }
 
-		if (GetComponent<BoxCollider> () != null)
+        if (GetComponent<BoxCollider> () != null)
 		{
 			GOCheck = true;
 			boxColl = GetComponent<BoxCollider> ();
-		}
+            boxColl.isTrigger = true;
+        }
 
 	}
 	
@@ -52,7 +54,7 @@ public class ArenaBehaviour : MonoBehaviour {
 		if (GOCheck)
 		{
 			boxColl.size = new Vector3 (BoxColliderSize, 0.1f, BoxColliderSize);
-		} 
+        } 
 		else
 		{
 			capsuleColl.radius = CapsuleColliderRadius;
