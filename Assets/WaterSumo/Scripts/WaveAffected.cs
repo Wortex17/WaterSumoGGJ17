@@ -8,10 +8,20 @@ namespace WaterSumo
     {
         public bool IsPushedByWaves = true;
         public float WavePushAffection = 1f;
+        public bool RidesOnWaveSlope = true;
 
-        public void ConsumeWave(Vector3 waveOrigin, float waveStrength)
+        public bool HasConsumedWave
         {
-            Vector3 waveVector = transform.position - waveOrigin;
+            get { return hasConsumedWave; }
+        }
+        public bool IsRidingOnWave
+        {
+            get { return hasConsumedWave; }
+        }
+
+        public void ConsumeWave(Wave wave, float waveStrength)
+        {
+            Vector3 waveVector = transform.position - wave.transform.position;
             if (IsPushedByWaves)
             {
                 var rigidBody = GetComponent<Rigidbody>();
@@ -20,7 +30,30 @@ namespace WaterSumo
                     rigidBody.AddForce(waveVector.normalized * waveStrength * WavePushAffection, ForceMode.Force);
                 }
             }
+
+            if (RidesOnWaveSlope)
+            {
+                float slopeHeight = wave.GetSlopeHeight(waveVector.magnitude);
+                Vector3 position = this.transform.position;
+
+                //var ray = new Ray();
+                //Physics.Raycast()
+
+                //GetComponent<Rigidbody>().AddForce(Vector3.up * slopeHeight, ForceMode.Acceleration);
+
+                this.transform.position = position;
+            }
+
+            hasConsumedWave = true;
         }
+
+        protected void LateUpdate()
+        {
+            hasConsumedWave = false;
+        }
+
+
+        private bool hasConsumedWave = false;
     }
 
 }
