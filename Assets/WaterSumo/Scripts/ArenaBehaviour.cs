@@ -21,13 +21,11 @@ public class ArenaBehaviour : MonoBehaviour {
 
 	[SerializeField]
 	private EShape shape;
-
-	[HideInInspector]
-	public GameObject Player;	
 	// Update is called once per frame
 	void Update () {
 
 		ModifyColl ();
+
 	}
 
 	void OnValidate()
@@ -51,7 +49,6 @@ public class ArenaBehaviour : MonoBehaviour {
 			capsuleColl.radius = CapsuleColliderRadius;
 			capsuleColl.height = CapsuleColliderHeight;
 			coll = capsuleColl;
-
 			break;
 		case 1:
 			if (GetComponent<CapsuleCollider> () != null)
@@ -64,7 +61,6 @@ public class ArenaBehaviour : MonoBehaviour {
 			boxColl.isTrigger = true;
 			boxColl.size = new Vector3 (BoxColliderSize, 0.1f, BoxColliderSize);
 			coll = boxColl;
-
 			break;
 		}
 	}
@@ -75,9 +71,24 @@ public class ArenaBehaviour : MonoBehaviour {
 		tempPlayerPos.y = 0;
 		Vector3 closestPoint = coll.ClosestPointOnBounds(tempPlayerPos * -1);
 		Vector3 distance = closestPoint - tempPlayerPos;
-		// Store Value in of x and z?
-		float x = distance.x;
-		float z = distance.z;
+
+		Debug.Log (distance);
+
+		switch ((int)shape) 
+		{
+		case 0:
+			if (Mathf.Abs (distance.x) > CapsuleColliderRadius)
+				Destroy (_player);
+			if (Mathf.Abs (distance.z) > CapsuleColliderRadius)
+				Destroy (_player);
+			break;
+		case 1:
+			if (Mathf.Abs(distance.x) > BoxColliderSize)
+				Destroy (_player);
+			if (Mathf.Abs(distance.z) > BoxColliderSize)
+				Destroy (_player);
+			break;
+		}
 		return distance;
 	}
 }
