@@ -74,7 +74,7 @@ public class BeatMaster : MonoBehaviour {
 
     [SerializeField]
     private float constantBeatsPerSecond = 1f;
-    [MinMaxRange(0.1f, 120f), SerializeField]
+    [MinMaxRange(0.1f, 15f), SerializeField]
     private MinMaxRange randomBeatsWait = new MinMaxRange();
     [SerializeField]
     private float randomBeatsFactor = 1f;
