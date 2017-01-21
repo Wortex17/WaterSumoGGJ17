@@ -28,6 +28,7 @@ public class ArenaBehaviour : MonoBehaviour {
 	void Update () {
 
 		ModifyColl ();
+
 	}
 
 	void OnValidate()
@@ -51,7 +52,6 @@ public class ArenaBehaviour : MonoBehaviour {
 			capsuleColl.radius = CapsuleColliderRadius;
 			capsuleColl.height = CapsuleColliderHeight;
 			coll = capsuleColl;
-
 			break;
 		case 1:
 			if (GetComponent<CapsuleCollider> () != null)
@@ -64,7 +64,6 @@ public class ArenaBehaviour : MonoBehaviour {
 			boxColl.isTrigger = true;
 			boxColl.size = new Vector3 (BoxColliderSize, 0.1f, BoxColliderSize);
 			coll = boxColl;
-
 			break;
 		}
 	}
@@ -78,6 +77,22 @@ public class ArenaBehaviour : MonoBehaviour {
 		// Store Value in of x and z?
 		float x = distance.x;
 		float z = distance.z;
+
+		switch ((int)shape) 
+		{
+		case 0:
+			if (Mathf.Abs (DistanceToBorder (Player).x) > CapsuleColliderRadius)
+				Destroy (Player);
+			if (Mathf.Abs (DistanceToBorder (Player).z) > CapsuleColliderRadius)
+				Destroy (Player);
+			break;
+		case 1:
+			if (Mathf.Abs(DistanceToBorder (Player).x) > BoxColliderSize)
+				Destroy (Player);
+			if (Mathf.Abs(DistanceToBorder (Player).z) > BoxColliderSize)
+				Destroy (Player);
+			break;
+		}
 		return distance;
 	}
 }
