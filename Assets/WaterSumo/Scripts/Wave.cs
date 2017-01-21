@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 
 namespace WaterSumo
@@ -11,11 +12,15 @@ namespace WaterSumo
         public float RadiusCurrent { get { return currentSize * 0.5f; } }
         public float RadiusMaximum { get { return maxSize * 0.5f; } }
         public float WaveLengthRadius { get { return waveLength * RadiusMaximum; } }
-        
+
+        public float Radius { get { return Application.isPlaying ? RadiusCurrent : RadiusMaximum; } }
+        public float InnerRadius { get { return Application.isPlaying ? InnerRadius : InnerRadiusMaximum; } }
+
         public void Reset()
         {
             currentSize = 0f;
             currentLifetime = 0f;
+
         }
 
 
@@ -27,7 +32,14 @@ namespace WaterSumo
             {
                 Reset();
                 enabled = false;
-                StartCoroutine(FadeTo(0.0f, 0.5f));               
+
+                var main = waveParticleSystem.main;
+                main.loop = false;
+                var emission = waveParticleSystem.emission;
+                emission.enabled = false;
+
+                if (autoDestroy)
+                    Destroy(this.gameObject);
                 return;
             }
 
@@ -35,35 +47,34 @@ namespace WaterSumo
             currentSize = lifetime01 * maxSize;
 
             Vector3 scale = Vector3.one*currentSize;
-            scale.y = 0.1f;
             transform.localScale = scale;
         }
 
-        //Fade alpha of inner and outer sphere, then destroy both
-        IEnumerator FadeTo(float aValue, float aTime)
+        private void ApplyVisuals()
         {
-            float alphaOuter = outerSphere.GetComponent<Renderer>().material.color.a;
-            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+            if (waveParticleSystem != null)
             {
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alphaOuter, aValue, t));
-                outerSphere.GetComponent<Renderer>().material.color = newColor;
-                yield return null;
-            }
-            float alphaInner = innerSphere.GetComponent<Renderer>().material.color.a;
-            for (float t = 0.0f; t<1.0f; t += Time.deltaTime / aTime)
-            {
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alphaInner, aValue, t));
-                innerSphere.GetComponent<Renderer>().material.color = newColor;
-                yield return null;
-            }
+                var main = waveParticleSystem.main;
+                float startSpeed = Mathf.Abs(main.startSpeedMultiplier);
+                float neededLifetime = WaveLengthRadius / (startSpeed > 0f ? startSpeed : 1f);
+                main.startLifetimeMultiplier = Mathf.Max(neededLifetime, 0f) + 0.5f;
 
-            DestroyImmediate(outerSphere);
-            DestroyImmediate(innerSphere);
+
+                var shape = waveParticleSystem.shape;
+                shape.radius = Radius;
+            }
         }
 
         void Start()
         {
             Reset();
+            if (waveParticleSystem != null)
+            {
+                var main = waveParticleSystem.main;
+                main.loop = true;
+                var emission = waveParticleSystem.emission;
+                emission.enabled = true;
+            }
         }
 
         void Update()
@@ -88,19 +99,12 @@ namespace WaterSumo
                 }
                 body.AddForce(waveToColliderN * pushStrength * affectedByWave, ForceMode.Force);
             }
+            ApplyVisuals();
         }
 
         void OnValidate()
         {
-            Vector3 scale = new Vector3(1f, 0f, 1f);
-            if (outerSphere != null)
-            {
-                outerSphere.transform.localScale = scale * 1f + new Vector3(0f, 0.1f, 0f);
-            }
-            if (innerSphere != null)
-            {
-                innerSphere.transform.localScale = scale * (1f - waveLength) + new Vector3(0f, 0.1f, 0f);
-            }
+            ApplyVisuals();
         }
 
         void OnDrawGizmos()
@@ -143,6 +147,9 @@ namespace WaterSumo
                 Gizmos.DrawLine(center + prevPoint, center + curPoint);
             }
         }
+        
+        [SerializeField]
+        private bool autoDestroy = true;
 
         private float currentSize = 0f;
         private float currentLifetime = 0f;
@@ -159,8 +166,6 @@ namespace WaterSumo
         private LayerMask layerMask = Physics.AllLayers;
 
         [SerializeField]
-        private GameObject innerSphere;
-        [SerializeField]
-        private GameObject outerSphere;
+        private ParticleSystem waveParticleSystem;
     }
 }
