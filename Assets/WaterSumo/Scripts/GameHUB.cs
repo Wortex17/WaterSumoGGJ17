@@ -28,14 +28,8 @@ namespace WaterSumo
             }
         }
 
-        public GameObject NullModule;
-		public GameManager GetGameManager()
-		{
-			if (GameManagerInstance == null)
-				GameManagerInstance = GetComponent<GameManager>();
-
-			return GameManagerInstance;
-		}
+	    public BeatMaster BeatMaster;
+	    public GameManager GameManager;
 
         protected void Awake()
         {
