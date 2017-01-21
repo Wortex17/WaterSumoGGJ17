@@ -19,7 +19,7 @@ namespace WaterSumo
 		}
 
 	}
-
+	[RequireComponent(typeof(AudioSource))]
 	public class GameManager : MonoBehaviour
 	{
 		//Player Prefab
@@ -37,8 +37,21 @@ namespace WaterSumo
 		[SerializeField]
 		private Material[] SwimmingRingMaterials;
 
+		//Sounds
+
+		private AudioSource GameManagerAudioSource;
+		[Header("Music")]
+		[SerializeField]
+		private AudioClip MenuMusic;
+		[SerializeField]
+		private AudioClip InGameMusic;
+
 		private void Awake()
 		{
+			GameManagerAudioSource = GetComponent<AudioSource>();
+			GameManagerAudioSource.playOnAwake = false;
+			GameManagerAudioSource.loop = true;
+
 			SpawnPoints = new Transform[4];
 			PlayerDatas = new PlayerData[4];
 			for (int id = 0; id < PlayerDatas.Length; id++)
@@ -46,7 +59,6 @@ namespace WaterSumo
 			SpawnPointsUsed = new bool[4];
 			for (int id = 0; id < SpawnPointsUsed.Length; id++)
 				SpawnPointsUsed[id] = false;
-
 
 			SceneManager.sceneLoaded += OnLevelLoaded;
 		}
@@ -65,6 +77,7 @@ namespace WaterSumo
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
+					PlayMusic(MenuMusic);
 					break;
 				default:
 					StartGame();
@@ -73,12 +86,18 @@ namespace WaterSumo
 			Debug.Log("OnLevelLoaded");
 		}
 
+		private void PlayMusic(AudioClip _audioClip)
+		{
+			GameManagerAudioSource.clip = _audioClip;
+			GameManagerAudioSource.Play();
+		}
+
 		//InGame
 		private void StartGame()
 		{
 			for (int id = 0; id < SpawnPointsUsed.Length; id++)
 				SpawnPointsUsed[id] = false;
-
+			PlayMusic(InGameMusic);
 			SetPlayerSpawnPoints();
 			SpawnAllPlayer();
 		}

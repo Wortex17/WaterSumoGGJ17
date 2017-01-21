@@ -119,7 +119,7 @@ public class ArenaBehaviour : MonoBehaviour {
 		switch (shape) 
 		{
 		case EShape.Capsule:
-			if (Mathf.Abs (distance.magnitude) > ArenaSize)
+			if (Mathf.Abs (distance.magnitude) > ArenaSize * 2)
 				Destroy (_player);
 			break;
 		case EShape.Box:
