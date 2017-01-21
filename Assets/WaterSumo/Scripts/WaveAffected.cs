@@ -52,7 +52,6 @@ namespace WaterSumo
                     //Cancel out gravity
                     rigidBody.AddForce(-Physics.gravity, ForceMode.Acceleration);
                 }
-                Debug.Log(slopeHeight);
                 transform.position = new Vector3(transform.position.x, buoyancyOffset + slopeHeight, transform.position.z);
 
             }
