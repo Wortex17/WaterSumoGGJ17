@@ -22,13 +22,12 @@ public class ArenaBehaviour : MonoBehaviour {
 	[SerializeField]
 	private EShape shape;
 
-	//[HideInInspector]
+	[HideInInspector]
 	public GameObject Player;	
 	// Update is called once per frame
 	void Update () {
 
 		ModifyColl ();
-		DistanceToBorder (Player);
 	}
 
 	void OnValidate()
@@ -76,8 +75,9 @@ public class ArenaBehaviour : MonoBehaviour {
 		tempPlayerPos.y = 0;
 		Vector3 closestPoint = coll.ClosestPointOnBounds(tempPlayerPos * -1);
 		Vector3 distance = closestPoint - tempPlayerPos;
-		//Debug.Log ("ClosPoint" + closestPoint);
-		Debug.Log ("Dist" + distance);
+		// Store Value in of x and z?
+		float x = distance.x;
+		float z = distance.z;
 		return distance;
 	}
 }
