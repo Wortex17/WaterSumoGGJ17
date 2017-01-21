@@ -33,11 +33,6 @@ namespace WaterSumo
                 Reset();
                 enabled = false;
 
-                var main = waveParticleSystem.main;
-                main.loop = false;
-                var emission = waveParticleSystem.emission;
-                emission.enabled = false;
-
                 if (autoDestroy)
                     Destroy(this.gameObject);
                 return;
@@ -64,16 +59,36 @@ namespace WaterSumo
             }
         }
 
-        void Start()
+        void OnEnable()
         {
-            Reset();
             if (waveParticleSystem != null)
             {
+                /*
                 var main = waveParticleSystem.main;
                 main.loop = true;
                 var emission = waveParticleSystem.emission;
                 emission.enabled = true;
+                */
+
+                waveParticleSystem.Play();
             }
+        }
+
+        void OnDisable()
+        {
+            if (waveParticleSystem != null)
+            {
+                /*
+                var main = waveParticleSystem.main;
+                main.loop = false;
+                var emission = waveParticleSystem.emission;
+                emission.enabled = false;
+                */
+
+                waveParticleSystem.Stop();
+            }
+
+            Reset();
         }
 
         void Update()
