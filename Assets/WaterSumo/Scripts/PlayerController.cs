@@ -24,6 +24,10 @@ namespace WaterSumo
 		[SerializeField]
 		private float MaxInputVelocity = 10.0f;
 
+        //BoundingBox
+        [SerializeField]
+        private GameObject BoundingBox;
+
 		void Start()
 		{
 
@@ -61,14 +65,15 @@ namespace WaterSumo
 		void Update()
 		{
 			HandleInput();
-		}
+            GetDistanceToBoundingBox();
+        }
 
 		private void HandleInput()
 		{
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
 			if (Input.GetButtonDown(InputXString))
 				Shuting();
-		}
+        }
 
 		private void HandleMovement(float _upInput, float _rightInput)
 		{
@@ -90,5 +95,33 @@ namespace WaterSumo
 		{
 			Debug.Log("arsch");
 		}
+
+        private void GetDistanceToBoundingBox()
+        {
+            //Doesn't work from inside
+            //Vector3 closestPoint = BoundingBox.GetComponent<Collider>().ClosestPointOnBounds(this.gameObject.transform.position);
+            //float Distance = Vector3.Distance(closestPoint, this.gameObject.transform.position);
+
+            if (BoundingBox.GetComponent<CapsuleCollider>() != null)
+            {
+                float Radius = BoundingBox.GetComponent<CapsuleCollider>().radius;
+                Vector3 BoundingBoxEdge = new Vector3(Radius, 0, 0);
+
+                //Return distance between Player and Edge
+                float Distance = Vector3.Distance(BoundingBoxEdge, this.gameObject.transform.position);
+                print("Distance to Edge:" + Distance);
+            }
+            else if (BoundingBox.GetComponent<BoxCollider>() != null)
+            {
+                Vector3 Size = BoundingBox.GetComponent<BoxCollider>().size;
+                Vector3 BoundingBoxEdge = new Vector3(Size.x / 2, 0);
+
+                float Distance = Vector3.Distance(BoundingBoxEdge, this.gameObject.transform.position);
+                print("Distance to Edge:" + Distance);
+
+            }
+            else
+                print("No suitable Collider detected. Are you sure a Bounding Box is assigned?");
+        }
 	}
 }
