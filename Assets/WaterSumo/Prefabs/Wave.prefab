@@ -87,25 +87,25 @@ MonoBehaviour:
   maxLifetime: 4.5
   waveLength: 0.3
   waveTrailExtra: 0.2
-  pushStrengthFactor: 10
+  pushStrengthFactor: 90
   pushStrengthOverLifetime:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1.6
+      value: 2.25
       inSlope: -2.0204544
-      outSlope: -1.4808003
-      tangentMode: 65
+      outSlope: 0.07462825
+      tangentMode: 1
     - serializedVersion: 2
       time: 0.104166664
-      value: 1.44575
-      inSlope: -1.4808003
-      outSlope: -2.6793125
-      tangentMode: 5
+      value: 1.488
+      inSlope: -20.48
+      outSlope: -3.5373263
+      tangentMode: 1
     - serializedVersion: 2
       time: 1
-      value: 0.31
+      value: 0.23
       inSlope: -0.3059993
       outSlope: -0.3059993
       tangentMode: 0
