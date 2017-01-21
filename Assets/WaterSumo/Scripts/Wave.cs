@@ -57,9 +57,8 @@ namespace WaterSumo
                 var main = waveParticleSystem.main;
                 float startSpeed = Mathf.Abs(main.startSpeedMultiplier);
                 float neededLifetime = WaveLengthRadius / (startSpeed > 0f ? startSpeed : 1f);
-                main.startLifetimeMultiplier = Mathf.Max(neededLifetime, 0f) + 0.5f;
-
-
+                main.startLifetimeMultiplier = Mathf.Max(neededLifetime, 0f) + Mathf.Max(0.1f, waveTrailExtra);
+                
                 var shape = waveParticleSystem.shape;
                 shape.radius = Radius;
             }
@@ -160,6 +159,8 @@ namespace WaterSumo
 
         [SerializeField, Range(0f, 1f)]
         private float waveLength = 0.2f;
+        [SerializeField]
+        private float waveTrailExtra = 0.2f;
         [SerializeField]
         private float pushStrength = 1f;
         [SerializeField]
