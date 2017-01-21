@@ -1,15 +1,80 @@
 fileFormatVersion: 2
-guid: e37f478cdc5b2b6498fd526a2b59a91e
-timeCreated: 1485005521
+guid: 7535c8ac62e6e154e90db4f46979794a
+timeCreated: 1485028880
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: Armature
+    100002: Bone
+    100004: Bone.001
+    100006: Bone.002
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.006
+    100016: Bone.006_end
+    100018: Bone.007
+    100020: Bone.008
+    100022: Bone.009
+    100024: Bone.010
+    100026: Bone.011
+    100028: Bone.012
+    100030: Bone.012_end
+    100032: Bone.013
+    100034: Bone.014
+    100036: Bone.015
+    100038: Bone.015_end
+    100040: Bone.016
+    100042: Bone.017
+    100044: Bone.018
+    100046: Bone.018_end
+    100048: Bone.019
+    100050: Bone.020
+    100052: Bone.021
+    100054: Bone.022
+    100056: Bone.022_end
+    100058: Plane
+    100060: //RootNode
+    400000: Armature
+    400002: Bone
+    400004: Bone.001
+    400006: Bone.002
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.006
+    400016: Bone.006_end
+    400018: Bone.007
+    400020: Bone.008
+    400022: Bone.009
+    400024: Bone.010
+    400026: Bone.011
+    400028: Bone.012
+    400030: Bone.012_end
+    400032: Bone.013
+    400034: Bone.014
+    400036: Bone.015
+    400038: Bone.015_end
+    400040: Bone.016
+    400042: Bone.017
+    400044: Bone.018
+    400046: Bone.018_end
+    400048: Bone.019
+    400050: Bone.020
+    400052: Bone.021
+    400054: Bone.022
+    400056: Bone.022_end
+    400058: Plane
+    400060: //RootNode
     4300000: Plane
+    7400000: Armature|Blank
+    7400002: Armature|Greets
+    7400004: Armature|Idle
+    7400006: Armature|IdleLiegend
+    7400008: Armature|IdleLiegend.001
+    9500000: //RootNode
+    13700000: Plane
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,7 +137,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

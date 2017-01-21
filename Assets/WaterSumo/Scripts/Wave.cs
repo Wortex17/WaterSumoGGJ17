@@ -15,7 +15,7 @@ namespace WaterSumo
         public float WaveLengthRadius { get { return waveLength * RadiusMaximum; } }
 
         public float Radius { get { return Application.isPlaying ? RadiusCurrent : RadiusMaximum; } }
-        public float InnerRadius { get { return Application.isPlaying ? InnerRadius : InnerRadiusMaximum; } }
+        public float InnerRadius { get { return Application.isPlaying ? InnerRadiusCurrent : InnerRadiusMaximum; } }
 
         public float CurrentLifetime01 {  get { return Mathf.InverseLerp(0f, maxLifetime, currentLifetime); } }
 
@@ -46,6 +46,22 @@ namespace WaterSumo
 
             Vector3 scale = Vector3.one*currentSize;
             transform.localScale = scale;
+        }
+
+        public float GetSlopeHeightLocal(float distance01)
+        {
+            return waveSlope.Evaluate(distance01);
+        }
+
+        public float GetSlopeHeight(float distance)
+        {
+            if (distance < InnerRadius || distance > Radius)
+            {
+                return 0f;
+            }
+
+            return GetSlopeHeightLocal(Mathf.InverseLerp(InnerRadius, Radius, distance));
+
         }
 
         private void ApplyVisuals()
@@ -116,7 +132,7 @@ namespace WaterSumo
                 {
                     var affected = capsuleCollider.GetComponent<WaveAffected>();
                     if(affected != null)
-                        affected.ConsumeWave(transform.position, strength);
+                        affected.ConsumeWave(this, strength);
                 }
             }
             ApplyVisuals();
@@ -193,6 +209,9 @@ namespace WaterSumo
         [SerializeField]
         private LayerMask layerMask = Physics.AllLayers;
 
+
+        [SerializeField]
+        private AnimationCurve waveSlope = AnimationCurve.Linear(0f, 1f, 1f, 1f);
         [SerializeField]
         private ParticleSystem waveParticleSystem;
     }

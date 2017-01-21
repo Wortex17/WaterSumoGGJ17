@@ -118,7 +118,6 @@ namespace WaterSumo
 		}
 		private void SpwanPlayer(PlayerId _playerId)
 		{
-			print("SpwanPlayer");
 			if (!PlayerDatas[(int)_playerId].IsLoggedIn)
 				return;
 
