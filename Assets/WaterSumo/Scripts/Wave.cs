@@ -6,7 +6,12 @@ namespace WaterSumo
 {
     public class Wave : MonoBehaviour
     {
-
+        public float InnerRadiusMaximum { get { return RadiusMaximum - WaveLengthRadius; } }
+        public float InnerRadiusCurrent { get { return RadiusCurrent - WaveLengthRadius; } }
+        public float RadiusCurrent { get { return currentSize * 0.5f; } }
+        public float RadiusMaximum { get { return maxSize * 0.5f; } }
+        public float WaveLengthRadius { get { return waveLength * RadiusMaximum; } }
+        
         public void Reset()
         {
             currentSize = 0f;
@@ -64,7 +69,7 @@ namespace WaterSumo
         void Update()
         {
             Progress(Time.deltaTime);
-            var colliders = Physics.OverlapSphere(transform.position, transform.TransformVector(Vector3.one*currentSize).magnitude, layerMask);
+            var colliders = Physics.OverlapSphere(transform.position, RadiusCurrent, layerMask);
 
             foreach (var collider in colliders)
             {
@@ -74,11 +79,10 @@ namespace WaterSumo
 
                 if (body == null)
                     continue;
-
-                float innerRadius = currentSize - maxSize*waveLength;
+                
                 var capsuleCollider = collider as CapsuleCollider;
                 float affectedByWave = 0f;
-                if (capsuleCollider != null && waveToCollider.magnitude - capsuleCollider.radius > innerRadius)
+                if (capsuleCollider != null && waveToCollider.magnitude - capsuleCollider.radius > InnerRadiusCurrent)
                 {
                     affectedByWave = 1f;
                 }
@@ -96,6 +100,47 @@ namespace WaterSumo
             if (innerSphere != null)
             {
                 innerSphere.transform.localScale = scale * (1f - waveLength) + new Vector3(0f, 0.1f, 0f);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Color prevColor = Gizmos.color;
+
+            if (!Application.isPlaying)
+            {
+                Gizmos.color = Color.blue;
+                DrawCircleGizmo(transform.position, RadiusMaximum);
+                Gizmos.color = Color.cyan;
+                DrawCircleGizmo(transform.position, InnerRadiusMaximum);
+            }
+            else
+            {
+                Gizmos.color = new Color(0.1f, 0f, 1f, 0.2f);
+                DrawCircleGizmo(transform.position, RadiusMaximum);
+                Gizmos.color = Color.blue;
+                DrawCircleGizmo(transform.position, RadiusCurrent);
+                Gizmos.color = Color.cyan;
+                DrawCircleGizmo(transform.position, InnerRadiusCurrent);
+            }
+
+            Gizmos.color = prevColor;
+        }
+
+        void DrawCircleGizmo(Vector3 center, float radius)
+        {
+            if (radius < 0f)
+                return;
+            int resolution = Mathf.FloorToInt(radius) * 8;
+            for (int i = 1; i <= resolution; i++)
+            {
+                float prevAngle = Mathf.InverseLerp(0, resolution, i - 1) * 2f * Mathf.PI;
+                float curAngle = Mathf.InverseLerp(0, resolution, i) * 2f * Mathf.PI;
+
+                Vector3 prevPoint = new Vector3(Mathf.Cos(prevAngle), 0f, Mathf.Sin(prevAngle)) * radius;
+                Vector3 curPoint = new Vector3(Mathf.Cos(curAngle), 0f, Mathf.Sin(curAngle)) * radius;
+
+                Gizmos.DrawLine(center + prevPoint, center + curPoint);
             }
         }
 
