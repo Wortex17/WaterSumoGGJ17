@@ -33,11 +33,6 @@ namespace WaterSumo
                 Reset();
                 enabled = false;
 
-                var main = waveParticleSystem.main;
-                main.loop = false;
-                var emission = waveParticleSystem.emission;
-                emission.enabled = false;
-
                 if (autoDestroy)
                     Destroy(this.gameObject);
                 return;
@@ -57,24 +52,43 @@ namespace WaterSumo
                 var main = waveParticleSystem.main;
                 float startSpeed = Mathf.Abs(main.startSpeedMultiplier);
                 float neededLifetime = WaveLengthRadius / (startSpeed > 0f ? startSpeed : 1f);
-                main.startLifetimeMultiplier = Mathf.Max(neededLifetime, 0f) + 0.5f;
-
-
+                main.startLifetimeMultiplier = Mathf.Max(neededLifetime, 0f) + Mathf.Max(0.1f, waveTrailExtra);
+                
                 var shape = waveParticleSystem.shape;
                 shape.radius = Radius;
             }
         }
 
-        void Start()
+        void OnEnable()
         {
-            Reset();
             if (waveParticleSystem != null)
             {
+                /*
                 var main = waveParticleSystem.main;
                 main.loop = true;
                 var emission = waveParticleSystem.emission;
                 emission.enabled = true;
+                */
+
+                waveParticleSystem.Play();
             }
+        }
+
+        void OnDisable()
+        {
+            if (waveParticleSystem != null)
+            {
+                /*
+                var main = waveParticleSystem.main;
+                main.loop = false;
+                var emission = waveParticleSystem.emission;
+                emission.enabled = false;
+                */
+
+                waveParticleSystem.Stop();
+            }
+
+            Reset();
         }
 
         void Update()
@@ -160,6 +174,8 @@ namespace WaterSumo
 
         [SerializeField, Range(0f, 1f)]
         private float waveLength = 0.2f;
+        [SerializeField]
+        private float waveTrailExtra = 0.2f;
         [SerializeField]
         private float pushStrength = 1f;
         [SerializeField]
