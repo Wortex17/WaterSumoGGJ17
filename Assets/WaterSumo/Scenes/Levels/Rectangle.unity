@@ -443,6 +443,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 114168194122229242, guid: a97d4302e663fc447b5748e3ba1a67d7,
+        type: 2}
+      propertyPath: delayFirstBeat
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a97d4302e663fc447b5748e3ba1a67d7, type: 2}
   m_IsPrefabParent: 0
@@ -1204,10 +1209,10 @@ MonoBehaviour:
   CapsuleColliderRadius: 0.5
   CapsuleColliderHeight: 5
   BoxColliderSize: 20
-  shape: 0
+  shape: 1
   Player: {fileID: 0}
---- !u!136 &1975970007
-CapsuleCollider:
+--- !u!65 &1975970007
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1215,9 +1220,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 5
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 0.1, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1975970008
 Transform:
