@@ -118,7 +118,7 @@ namespace WaterSumo
 			while (spawnPointId == -1);
 
 			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayersLoggedIn[(int)_playerId].MaterialId]);
+			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[(int )_playerId]);
 
 
 		}
