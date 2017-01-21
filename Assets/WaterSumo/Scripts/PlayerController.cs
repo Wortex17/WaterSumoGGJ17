@@ -6,6 +6,7 @@ namespace WaterSumo
 {
 
 	public enum InputType { None, Controller1, Controller2, Controller3, Controller4 }
+
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerController : MonoBehaviour
 	{
@@ -24,9 +25,8 @@ namespace WaterSumo
 		[SerializeField]
 		private float MaxInputVelocity = 10.0f;
 
-		void Start()
+		void Awake()
 		{
-
 			PlayerRigidbody = GetComponent<Rigidbody>();
 			SetInput(PlayerInputType);
 		}
@@ -61,14 +61,14 @@ namespace WaterSumo
 		void Update()
 		{
 			HandleInput();
-		}
+        }
 
 		private void HandleInput()
 		{
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
 			if (Input.GetButtonDown(InputXString))
 				Shuting();
-		}
+        }
 
 		private void HandleMovement(float _upInput, float _rightInput)
 		{

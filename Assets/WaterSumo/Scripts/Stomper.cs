@@ -10,9 +10,9 @@ public class Stomper : MonoBehaviour {
 	private float stompingTimer = 0;
 
     [SerializeField]
-    private int minRange = 2;
+    private float minRange = 2;
     [SerializeField]
-    private int maxRange = 10;
+    private float maxRange = 10;
 
     private float stompingInterval;
 
@@ -33,9 +33,6 @@ public class Stomper : MonoBehaviour {
 
 		if (stompingTimer >= stompingInterval)
 			STOMPIT ();
-
-		Debug.Log ("Timer" + stompingTimer);
-		
 	}
 
 	void STOMPIT()
