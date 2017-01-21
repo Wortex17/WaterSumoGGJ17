@@ -119,15 +119,15 @@ public class ArenaBehaviour : MonoBehaviour {
 		switch ((int)shape) 
 		{
 		case 0:
-			if (Mathf.Abs (distance.x) > ArenaSize)
+			if (Mathf.Abs (distance.x) > (ArenaSize * 1.5f))
 				Destroy (_player);
-			if (Mathf.Abs (distance.z) > ArenaSize)
+			if (Mathf.Abs (distance.z) > (ArenaSize * 1.5f))
 				Destroy (_player);
 			break;
 		case 1:
-			if (Mathf.Abs(distance.x) > ArenaSize)
+			if (Mathf.Abs(distance.x) > (ArenaSize * 2))
 				Destroy (_player);
-			if (Mathf.Abs(distance.z) > ArenaSize)
+			if (Mathf.Abs(distance.z) > (ArenaSize * 2))
 				Destroy (_player);
 			break;
 		}
