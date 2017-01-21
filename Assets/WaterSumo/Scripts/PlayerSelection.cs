@@ -89,8 +89,8 @@ namespace WaterSumo
 				if (Input.GetButtonDown ("Controller1X"))
 				{
 					IsPictureTaken [0] = true;
-					Manager.PlayerDatas [0].IsLoggedIn = true;
-					Manager.PlayerDatas [0].MaterialId = id[0];
+					GameHUB.Instance.GameManager.PlayerDatas [0].IsLoggedIn = true;
+					GameHUB.Instance.GameManager.PlayerDatas [0].MaterialId = id[0];
 					LockInput[0] = true;
 					Debug.Log ("Player1 logged in");
 				}
@@ -127,8 +127,8 @@ namespace WaterSumo
 				if (Input.GetButtonDown ("Controller2X"))
 				{
 					IsPictureTaken [1] = true;
-					Manager.PlayerDatas [1].IsLoggedIn = true;
-					Manager.PlayerDatas [1].MaterialId = id[1];
+					GameHUB.Instance.GameManager.PlayerDatas [1].IsLoggedIn = true;
+					GameHUB.Instance.GameManager.PlayerDatas [1].MaterialId = id[1];
 					LockInput[1] = true;
 					Debug.Log ("Player2 logged in");
 				}
