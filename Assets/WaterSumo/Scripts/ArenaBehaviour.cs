@@ -4,23 +4,12 @@ using UnityEngine;
 
 public class ArenaBehaviour : MonoBehaviour {
     public enum EShape { Capsule = 0, Box = 1 }
-
-    //[SerializeField, Range(0, 100)]
-	//private float CapsuleColliderRadius = 0.5f;
-	[SerializeField]
-	private float CapsuleColliderHeight = 5.0f;
-
-	//[SerializeField, Range(0, 100)]
-	//private float BoxColliderSize = 1.0f;
-
+    
     [SerializeField, Range(0, 100)]
     private float ArenaSize = 1.0f;
 
     [SerializeField]
 	private EShape shape;
-
-	[HideInInspector]
-	public GameObject Player;	
 
 	void Start ()
     {
@@ -37,6 +26,8 @@ public class ArenaBehaviour : MonoBehaviour {
     void GenerateBorder()
     {
         var lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+            return;
         lineRenderer.numPositions = 0;
         List<Vector3> positions = new List<Vector3>();
         switch (shape)
@@ -87,22 +78,28 @@ public class ArenaBehaviour : MonoBehaviour {
 		        {
 		            boxCollider.enabled = false;
                 }
-		        capsuleCollider.enabled = true;
+		        if (capsuleCollider != null)
+                {
+                    capsuleCollider.enabled = true;
 
-                capsuleCollider.isTrigger = true;
-                capsuleCollider.radius = ArenaSize;
-                capsuleCollider.height = 20f;
-
+                    capsuleCollider.isTrigger = true;
+                    capsuleCollider.radius = ArenaSize;
+                    capsuleCollider.height = 20f;
+                }
 			    break;
 		    case EShape.Box:
                 if (capsuleCollider != null)
                 {
                     capsuleCollider.enabled = false;
                 }
-                boxCollider.enabled = true;
 
-                boxCollider.isTrigger = true;
-                boxCollider.size = new Vector3 (ArenaSize, 20f, ArenaSize);
+                if (boxCollider != null)
+                {
+                    boxCollider.enabled = true;
+
+                    boxCollider.isTrigger = true;
+                    boxCollider.size = new Vector3(ArenaSize, 20f, ArenaSize);
+                }
 
 			    break;
 		}
@@ -113,7 +110,25 @@ public class ArenaBehaviour : MonoBehaviour {
 		Vector3 tempPlayerPos = _player.transform.position;
 		tempPlayerPos.y = 0;
 		Vector3 closestPoint = CurrentCollider.ClosestPointOnBounds(tempPlayerPos * -1);
-        Vector3 distance = closestPoint - tempPlayerPos;
+		Vector3 distance = closestPoint - tempPlayerPos;
+
+		Debug.Log (distance);
+
+		switch ((int)shape) 
+		{
+		case 0:
+			if (Mathf.Abs (distance.x) > ArenaSize)
+				Destroy (_player);
+			if (Mathf.Abs (distance.z) > ArenaSize)
+				Destroy (_player);
+			break;
+		case 1:
+			if (Mathf.Abs(distance.x) > ArenaSize)
+				Destroy (_player);
+			if (Mathf.Abs(distance.z) > ArenaSize)
+				Destroy (_player);
+			break;
+		}
 		return distance;
     }
 

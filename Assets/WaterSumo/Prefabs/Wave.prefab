@@ -85,9 +85,27 @@ MonoBehaviour:
   autoDestroy: 0
   maxSize: 23
   maxLifetime: 4.5
-  waveLength: 0.35
+  waveLength: 0.3
   waveTrailExtra: 0.2
-  pushStrength: 2.95
+  pushStrengthFactor: 10
+  pushStrengthOverLifetime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1.3000001
+      inSlope: -1.2025427
+      outSlope: -1.2025427
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: -0.17999966
+      outSlope: -0.17999966
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -152,7 +170,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 1.005
+      scalar: 0.89
       maxCurve:
         serializedVersion: 2
         m_Curve:
