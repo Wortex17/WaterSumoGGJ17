@@ -38,7 +38,7 @@ namespace WaterSumo
 	
 		void DetectPlayers()
 		{
-			if (Input.GetButtonDown ("Jump"))
+			if (Input.GetButtonDown ("Controller1A"))
 			{
 				IsPlayerConnected [0] = true;
 				PlayerPortraits [0].sprite = Sumo [0];
