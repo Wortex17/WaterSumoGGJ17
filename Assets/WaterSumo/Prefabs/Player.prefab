@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIdType: 4
-  MoveSpeed: 3
+  MoveSpeed: 5
   MaxInputVelocity: 3.5
   SwimmingRing: {fileID: 1692889221937696}
 --- !u!136 &136963667936224148
