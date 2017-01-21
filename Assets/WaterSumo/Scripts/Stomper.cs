@@ -1,24 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Stomper : MonoBehaviour {
+public class Stomper : BeatReceiver {
 
-	[SerializeField]
-	private GameObject Wave;
+	[SerializeField, FormerlySerializedAs("Wave")]
+	private GameObject WavePrefab;
 
-	private float stompingTimer = 0;
-
-    [SerializeField]
-    private float minRange = 2;
-    [SerializeField]
-    private float maxRange = 10;
-
-    private float stompingInterval;
-
-	[SerializeField]
-	private float timeMultiplicator;
-
+    /*
 	void Start () {
 
         // TODO: Get the wave reference by code or drag an drop in inspector?!
@@ -32,20 +22,16 @@ public class Stomper : MonoBehaviour {
 		stompingTimer += Time.deltaTime * timeMultiplicator;
 
 		if (stompingTimer >= stompingInterval)
-			STOMPIT ();
+			Stomp();
 	}
+    */
+    protected override void OnBeat(int beat)
+    {
+        Stomp();
+    }
 
-	void STOMPIT()
-	{
-		// Create waves?!?!
-		Instantiate(Wave);
-
-        //Calculate new Interval after each wave
-        stompingInterval = Random.Range(minRange, maxRange);
-
-		// TODO: Add some Coordinates for instantiating maybe?
-		Debug.Log("BinDrin");
-		// ResetTimer
-		stompingTimer = 0;
-	}
+    public void Stomp()
+    {
+        Instantiate(WavePrefab, transform.position, Quaternion.identity, this.transform);
+    }
 }

@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1159757671439702}
   m_IsPrefabParent: 1
+--- !u!1 &1129926423349240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4825845541076582}
+  - component: {fileID: 114168194122229242}
+  m_Layer: 0
+  m_Name: BeatMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1159757671439702
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,34 +43,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1507660725952674
+--- !u!1 &1221295848666866
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4523009550189422}
+  - component: {fileID: 4754496606825962}
+  - component: {fileID: 114279743549870416}
   m_Layer: 0
-  m_Name: NullModule
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4523009550189422
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1507660725952674}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4698868698481316}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4698868698481316
 Transform:
   m_ObjectHideFlags: 1
@@ -65,8 +69,35 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4523009550189422}
+  - {fileID: 4825845541076582}
+  - {fileID: 4754496606825962}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4754496606825962
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221295848666866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4698868698481316}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4825845541076582
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129926423349240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4698868698481316}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114057271691910604
@@ -80,4 +111,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29a72f8008d2cb43a57c61c999d04ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NullModule: {fileID: 1507660725952674}
+  BeatMaster: {fileID: 114168194122229242}
+  GameManager: {fileID: 114279743549870416}
+--- !u!114 &114168194122229242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129926423349240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382b7940040a9e94aa11b708d437a8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatMode: 1
+  constantBeatsPerSecond: 1
+  randomBeatsWait:
+    rangeStart: 3
+    rangeEnd: 8
+  randomBeatsFactor: 1
+--- !u!114 &114279743549870416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221295848666866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059e05e6cf80dc438d9e35c69e2ab36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d,
+    type: 2}
+  SwimmingRingMaterials:
+  - {fileID: 2100000, guid: 77c9032ecfca006408eb72890cdf8b37, type: 2}
+  - {fileID: 2100000, guid: abdf36c8bb5842440a9d301a4fd54488, type: 2}
+  - {fileID: 2100000, guid: 7c9cb2b5e82b5714b93824ce7a34bd78, type: 2}
+  - {fileID: 2100000, guid: 26cf227c083ab36469180c0c41013513, type: 2}
