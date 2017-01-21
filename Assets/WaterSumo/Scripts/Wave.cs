@@ -82,7 +82,7 @@ namespace WaterSumo
                 
                 var capsuleCollider = collider as CapsuleCollider;
                 float affectedByWave = 0f;
-                if (capsuleCollider != null && waveToCollider.magnitude - capsuleCollider.radius > InnerRadiusCurrent)
+                if (capsuleCollider != null && (InnerRadiusCurrent >0f && waveToCollider.magnitude - capsuleCollider.radius > InnerRadiusCurrent))
                 {
                     affectedByWave = 1f;
                 }
