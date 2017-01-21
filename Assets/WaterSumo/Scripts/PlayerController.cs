@@ -6,6 +6,7 @@ namespace WaterSumo
 {
 
 	public enum InputType { None, Controller1, Controller2, Controller3, Controller4 }
+
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerController : MonoBehaviour
 	{
@@ -24,9 +25,8 @@ namespace WaterSumo
 		[SerializeField]
 		private float MaxInputVelocity = 10.0f;
 
-		void Start()
+		private void Awake()
 		{
-
 			PlayerRigidbody = GetComponent<Rigidbody>();
 			SetInput(PlayerInputType);
 		}
