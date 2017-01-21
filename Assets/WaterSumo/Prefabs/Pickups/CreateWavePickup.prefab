@@ -161,7 +161,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -185,4 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7083b06e631cd1549b1da47a615b6932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PickupSprite: {fileID: 21300000, guid: b1479b3ec07d0e648b11130ccbc67ff3, type: 3}
   WavePrefab: {fileID: 1052794446211202, guid: f8ece1c536823af49b7f384bfbd6d2d3, type: 2}

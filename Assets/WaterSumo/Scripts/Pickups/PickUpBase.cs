@@ -8,6 +8,8 @@ namespace WaterSumo
 	[RequireComponent(typeof(AudioSource))]
 	public class PickupBase : MonoBehaviour
 	{
+		[SerializeField]
+		private Sprite PickupSprite;
 		private AudioSource PickupAudioSource;
 
 		virtual protected void Start()
@@ -35,6 +37,7 @@ namespace WaterSumo
 			PlayerController playerController = _coll.GetComponent<PlayerController>();
 			if(playerController)
 			{
+				playerController.GameHUD.SetPickup(playerController.PlayerIdType, PickupSprite);
 				PickupAudioSource.Play();
 				GetComponent<MeshRenderer>().enabled = false;
 				GetComponent<Collider>().enabled = false;

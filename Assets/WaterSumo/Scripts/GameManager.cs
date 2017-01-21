@@ -38,13 +38,22 @@ namespace WaterSumo
 		private Material[] SwimmingRingMaterials;
 
 		//Sounds
-
 		private AudioSource GameManagerAudioSource;
 		[Header("Music")]
 		[SerializeField]
 		private AudioClip MenuMusic;
 		[SerializeField]
 		private AudioClip InGameMusic;
+
+		//HUD
+		[Header("HUD")]
+		[SerializeField]
+		private GameObject HUDPrefab;
+		private HUD HUDInstanz;
+		[SerializeField]
+		private Sprite[] CharacterSprite;
+
+
 
 		private void Awake()
 		{
@@ -102,8 +111,10 @@ namespace WaterSumo
 		//InGame
 		private void StartGame()
 		{
+			SpawnHUD();
 			for (int id = 0; id < SpawnPointsUsed.Length; id++)
 				SpawnPointsUsed[id] = false;
+
 			PlayMusic(InGameMusic);
 			SetPlayerSpawnPoints();
 			SpawnAllPlayer();
@@ -142,8 +153,36 @@ namespace WaterSumo
 			while (spawnPointId == -1);
 
 			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayerDatas[(int)_playerId].MaterialId]);
+			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayerDatas[(int)_playerId].MaterialId], HUDInstanz);
 		}
 
+
+		private void SpawnHUD()
+		{
+			GameObject newHUD = Instantiate(HUDPrefab, new Vector3(9000.0f, 9000.0f, 9000.0f), Quaternion.identity);
+			HUDInstanz = newHUD.GetComponentInChildren<HUD>();
+			
+			if (PlayerDatas[0].IsLoggedIn)
+			{
+				HUDInstanz.SetEnableCharacter(PlayerId.Player1, true);
+				HUDInstanz.SetCharacterImage(PlayerId.Player1, CharacterSprite[PlayerDatas[0].MaterialId]);
+			}
+			if (PlayerDatas[1].IsLoggedIn)
+			{
+				HUDInstanz.SetEnableCharacter(PlayerId.Player2, true);
+				HUDInstanz.SetCharacterImage(PlayerId.Player2, CharacterSprite[PlayerDatas[1].MaterialId]);
+			}
+			if (PlayerDatas[2].IsLoggedIn)
+			{
+
+				HUDInstanz.SetEnableCharacter(PlayerId.Player3, true);
+				HUDInstanz.SetCharacterImage(PlayerId.Player3, CharacterSprite[PlayerDatas[2].MaterialId]);
+			}
+			if (PlayerDatas[3].IsLoggedIn)
+			{
+				HUDInstanz.SetEnableCharacter(PlayerId.Player4, true);
+				HUDInstanz.SetCharacterImage(PlayerId.Player4, CharacterSprite[PlayerDatas[3].MaterialId]);
+			}
+		}
 	}
 }

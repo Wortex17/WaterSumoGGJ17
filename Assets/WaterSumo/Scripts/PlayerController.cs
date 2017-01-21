@@ -38,6 +38,8 @@ namespace WaterSumo
 		public PickupBase PickupCanUse;
 		[HideInInspector]
 		public PickupBase ActivePickup;
+		[HideInInspector]
+		public HUD GameHUD;
 
 		//Emogis
 		[Header("Emogis")]
@@ -83,11 +85,12 @@ namespace WaterSumo
 			PlayerWaveAffected = GetComponent<WaveAffected>();
 		}
 
-		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial)
+		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial, HUD _gameHud)
 		{
+			GameHUD = _gameHud;
+
 			PlayerIdType = _playerId;
 			SetInput(_playerId);
-
 			//Set swimmingRing material
 			SwimmingRing.GetComponent<MeshRenderer>().material = _swimmingRingMaterial;
 			IsInitialice = true;
@@ -134,7 +137,9 @@ namespace WaterSumo
 				HandleInput();
 
 				//DistanceToBorder
-				IsCloseToBounds = (LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude < MinDistCloseToBounds);
+				float distToBounds = LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude;
+				IsCloseToBounds = (distToBounds < MinDistCloseToBounds);
+				GameHUD.SetDistToBounds(PlayerIdType, distToBounds);
 				Debug.Log(LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude);
 				ResetEmogisTimer();
 				HandleEmogis();
@@ -177,6 +182,7 @@ namespace WaterSumo
 		{
 			if (ActivePickup == null && PickupCanUse != null)
 			{
+				GameHUD.SetPickup(PlayerIdType, null);
 				ActivePickup = PickupCanUse;
 				ActivePickup.ActivatePickUp(this);
 
