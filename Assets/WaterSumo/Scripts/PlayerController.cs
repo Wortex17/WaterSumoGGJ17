@@ -16,16 +16,24 @@ namespace WaterSumo
 		private string InputUpString = "";
 		private string InputRightString = "";
 		private string InputXString = "";
+		private string InputBString = "";
+		private string InputAString = "";
 
 		//Movement
 		[SerializeField]
-		private float MoveSpeed = 5.0f;
+		public float MoveSpeed = 5.0f;
 		[SerializeField]
-		private float MaxInputVelocity = 10.0f;
+		public float MaxInputVelocity = 10.0f;
 
 		//Geometry
 		[SerializeField]
 		private GameObject SwimmingRing;
+
+		//Powerup
+		[HideInInspector]
+		public PickupBase PickupCanUse;
+		[HideInInspector]
+		public PickupBase ActivePickup;
 
 		//ArenaBehaviour
 		private ArenaBehaviour LocalArenaBehaviour;
@@ -53,21 +61,29 @@ namespace WaterSumo
 					InputUpString = "Controller1Up";
 					InputRightString = "Controller1Right";
 					InputXString = "Controller1X";
+					InputBString = "Controller1B";
+					InputAString = "Controller1A";
 					break;
 				case PlayerId.Player2:
 					InputUpString = "Controller2Up";
 					InputRightString = "Controller2Right";
 					InputXString = "Controller2X";
+					InputBString = "Controller2B";
+					InputAString = "Controller2A";
 					break;
 				case PlayerId.Player3:
 					InputUpString = "Controller3Up";
 					InputRightString = "Controller3Right";
 					InputXString = "Controller3X";
+					InputBString = "Controller3B";
+					InputAString = "Controller3A";
 					break;
 				case PlayerId.Player4:
 					InputUpString = "Controller4Up";
 					InputRightString = "Controller4Right";
 					InputXString = "Controller4X";
+					InputBString = "Controller4B";
+					InputAString = "Controller4A";
 					break;
 			}
 		}
@@ -86,12 +102,16 @@ namespace WaterSumo
 		private void HandleInput()
 		{
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
+
 			if (Input.GetButtonDown(InputXString))
 				Shuting();
-        }
+
+			if (Input.GetButtonDown(InputAString))
+				ActivatePowerUp();
+
+		}
 		private void HandleMovement(float _upInput, float _rightInput)
 		{
-			Debug.Log(transform.name + " up: " + _upInput);
 			Vector3 moveDirection = new Vector3(-_rightInput, 0.0f, _upInput);
 			float actualVelocityMagnitude = PlayerRigidbody.velocity.magnitude;
 
@@ -109,6 +129,15 @@ namespace WaterSumo
 		private void Shuting()
 		{
 			Debug.Log("arsch");
+		}
+
+		private void ActivatePowerUp()
+		{
+			if (ActivePickup == null && PickupCanUse != null)
+			{
+				ActivePickup = PickupCanUse;
+				ActivePickup.ActivatePickUp(this);
+			}
 		}
 	}
 }
