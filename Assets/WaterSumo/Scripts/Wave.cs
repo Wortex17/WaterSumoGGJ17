@@ -116,7 +116,13 @@ namespace WaterSumo
                 {
                     affectedByWave = 1f;
                 }
-                body.AddForce(waveToColliderN * strength * affectedByWave, ForceMode.Force);
+
+                var affected = capsuleCollider.GetComponent<WaveAffected>();
+                if (affected != null)
+                {
+                    if(affected.IsPushedByWaves)
+                        body.AddForce(waveToColliderN * strength * affectedByWave, ForceMode.Force);
+                }
             }
             ApplyVisuals();
         }
