@@ -111,17 +111,12 @@ namespace WaterSumo
                     continue;
                 
                 var capsuleCollider = collider as CapsuleCollider;
-                float affectedByWave = 0f;
+
                 if (capsuleCollider != null && (InnerRadiusCurrent >0f && waveToCollider.magnitude - capsuleCollider.radius > InnerRadiusCurrent))
                 {
-                    affectedByWave = 1f;
-                }
-
-                var affected = capsuleCollider.GetComponent<WaveAffected>();
-                if (affected != null)
-                {
-                    if(affected.IsPushedByWaves)
-                        body.AddForce(waveToColliderN * strength * affectedByWave, ForceMode.Force);
+                    var affected = capsuleCollider.GetComponent<WaveAffected>();
+                    if(affected != null)
+                        affected.ConsumeWave(transform.position, strength);
                 }
             }
             ApplyVisuals();
