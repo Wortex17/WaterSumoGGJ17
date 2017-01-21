@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
 namespace WaterSumo
 {
@@ -31,7 +32,11 @@ namespace WaterSumo
 	    public BeatMaster BeatMaster;
 	    public GameManager GameManager;
 
-        protected void Awake()
+		public AudioMixerGroup MusicAudioMixerGroup;
+		public AudioMixerGroup FXAudioMixerGroup;
+
+
+		protected void Awake()
         {
             //Look if we are the shared one, and if not we destroy ourselves
             bool otherIsShared = false;

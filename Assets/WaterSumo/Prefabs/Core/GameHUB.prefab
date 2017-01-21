@@ -113,6 +113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BeatMaster: {fileID: 114168194122229242}
   GameManager: {fileID: 114279743549870416}
+  MusicAudioMixerGroup: {fileID: 24324684, guid: 0ac7fb39e445048d89688f69c2a1839a,
+    type: 2}
+  FXAudioMixerGroup: {fileID: 24301952, guid: 0ac7fb39e445048d89688f69c2a1839a, type: 2}
 --- !u!114 &114168194122229242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382b7940040a9e94aa11b708d437a8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayFirstBeat: 3
   beatMode: 1
   constantBeatsPerSecond: 1
   randomBeatsWait:

@@ -6,9 +6,13 @@ namespace WaterSumo
 {
 
 	[RequireComponent(typeof(Rigidbody))]
+	[RequireComponent(typeof(WaveAffected))]
 	public class PlayerController : MonoBehaviour
 	{
 		private Rigidbody PlayerRigidbody;
+		private ArenaBehaviour LocalArenaBehaviour;
+		[HideInInspector]
+		public WaveAffected PlayerWaveAffected;
 		private bool IsInitialice = false;
 		//Input
 		[SerializeField]
@@ -35,13 +39,13 @@ namespace WaterSumo
 		[HideInInspector]
 		public PickupBase ActivePickup;
 
-		//ArenaBehaviour
-		private ArenaBehaviour LocalArenaBehaviour;
+		
 
 		void Awake()
 		{
 			PlayerRigidbody = GetComponent<Rigidbody>();
 			LocalArenaBehaviour = FindObjectOfType<ArenaBehaviour>();
+			PlayerWaveAffected = GetComponent<WaveAffected>();
 		}
 
 		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial)
