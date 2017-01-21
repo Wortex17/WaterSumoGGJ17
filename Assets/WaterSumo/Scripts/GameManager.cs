@@ -38,6 +38,9 @@ namespace WaterSumo
 		private Material[] SwimmingRingMaterials;
 
 
+		//ArenaBehaviour
+		ArenaBehaviour LocalArenaBehaviour;
+
 		private void Awake()
 		{
 			SpawnPoints = new Transform[4];
@@ -119,8 +122,6 @@ namespace WaterSumo
 
 			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
 			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayerDatas[(int)_playerId].MaterialId]);
-
-
 		}
 
 	}
