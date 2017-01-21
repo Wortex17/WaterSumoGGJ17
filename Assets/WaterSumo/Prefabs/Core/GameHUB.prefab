@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeatMaster: {fileID: 114168194122229242}
-  GameManager: {fileID: 0}
+  GameManager: {fileID: 114017234354729646}
   MusicAudioMixerGroup: {fileID: 24324684, guid: 0ac7fb39e445048d89688f69c2a1839a,
     type: 2}
   FXAudioMixerGroup: {fileID: 24301952, guid: 0ac7fb39e445048d89688f69c2a1839a, type: 2}
