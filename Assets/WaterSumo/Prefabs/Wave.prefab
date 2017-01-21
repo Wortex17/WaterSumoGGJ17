@@ -105,9 +105,9 @@ MonoBehaviour:
       tangentMode: 5
     - serializedVersion: 2
       time: 1
-      value: 0.1
-      inSlope: -0.17999966
-      outSlope: -0.17999966
+      value: 0.31
+      inSlope: -0.3059993
+      outSlope: -0.3059993
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
