@@ -79,6 +79,13 @@ namespace WaterSumo
 					PlayerDatas[3].IsLoggedIn = false;
 					PlayMusic(MenuMusic);
 					break;
+				case "CharacterSelection":
+					PlayerDatas[0].IsLoggedIn = true;
+					PlayerDatas[1].IsLoggedIn = false;
+					PlayerDatas[2].IsLoggedIn = false;
+					PlayerDatas[3].IsLoggedIn = false;
+					PlayMusic(MenuMusic);
+					break;
 				default:
 					StartGame();
 					break;
