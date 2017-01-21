@@ -23,7 +23,6 @@ namespace WaterSumo
 
 		private bool[] LockInput = new bool[4];
 		
-		private WaterSumo.GameManager Manager;
 		
 		// Update is called once per frame
 		void Update () {
@@ -45,6 +44,7 @@ namespace WaterSumo
 			}
 			if (Input.GetButtonDown ("Controller1B"))
 				IsPlayerConnected [0] = false;
+			
 			if (Input.GetButtonDown ("Controller2A"))
 			{
 				PlayerPortraits [1].sprite = Sumo [0];
@@ -52,6 +52,7 @@ namespace WaterSumo
 			}
 			if (Input.GetButtonDown ("Controller2B"))
 				IsPlayerConnected [1] = false;
+			
 			if (Input.GetButtonDown ("Controller3A"))
 			{
 				PlayerPortraits [2].sprite = Sumo [0];
@@ -59,6 +60,7 @@ namespace WaterSumo
 			}
 			if (Input.GetButtonDown ("Controller3B"))
 				IsPlayerConnected [2] = false;
+			
 			if (Input.GetButtonDown ("Controller4A"))
 			{
 				PlayerPortraits [3].sprite = Sumo [0];
@@ -114,8 +116,8 @@ namespace WaterSumo
 				if (Input.GetButtonDown (_ButtonX1))
 				{
 					IsPictureTaken [_id] = true;
-					Manager.PlayerDatas [_arrayIndex].IsLoggedIn = true;
-					Manager.PlayerDatas [_arrayIndex].MaterialId = _id;
+					GameHUB.Instance.GameManager.PlayerDatas [_arrayIndex].IsLoggedIn = true;
+					GameHUB.Instance.GameManager.PlayerDatas [_arrayIndex].MaterialId = _id;
 					LockInput[_arrayIndex] = true;
 				}
 			}
