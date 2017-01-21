@@ -15,7 +15,7 @@ namespace WaterSumo
 		public PlayerData(bool _isLoggedIn)
 		{
 			IsLoggedIn = _isLoggedIn;
-			MaterialId = -1;
+			MaterialId = 0;
 		}
 
 	}
@@ -27,7 +27,7 @@ namespace WaterSumo
 		private GameObject PlayerPrefab;
 
 		//LoggedIn states
-		public PlayerData[] PlayersLoggedIn;
+		public PlayerData[] PlayerDatas;
 
 		//SpwanPoints
 		private Transform[] SpawnPoints;
@@ -41,9 +41,9 @@ namespace WaterSumo
 		private void Awake()
 		{
 			SpawnPoints = new Transform[4];
-			PlayersLoggedIn = new PlayerData[4];
-			for (int id = 0; id < PlayersLoggedIn.Length; id++)
-				PlayersLoggedIn[id] = new PlayerData(true);
+			PlayerDatas = new PlayerData[4];
+			for (int id = 0; id < PlayerDatas.Length; id++)
+				PlayerDatas[id] = new PlayerData(true);
 			SpawnPointsUsed = new bool[4];
 			for (int id = 0; id < SpawnPointsUsed.Length; id++)
 				SpawnPointsUsed[id] = false;
@@ -62,10 +62,10 @@ namespace WaterSumo
 			switch (_actualScene.name)
 			{
 				case "MaineMenu":
-					PlayersLoggedIn[0].IsLoggedIn = true;
-					PlayersLoggedIn[1].IsLoggedIn = false;
-					PlayersLoggedIn[2].IsLoggedIn = false;
-					PlayersLoggedIn[3].IsLoggedIn = false;
+					PlayerDatas[0].IsLoggedIn = true;
+					PlayerDatas[1].IsLoggedIn = false;
+					PlayerDatas[2].IsLoggedIn = false;
+					PlayerDatas[3].IsLoggedIn = false;
 					break;
 				default:
 					StartGame();
@@ -101,7 +101,7 @@ namespace WaterSumo
 		private void SpwanPlayer(PlayerId _playerId)
 		{
 			print("SpwanPlayer");
-			if (!PlayersLoggedIn[(int)_playerId].IsLoggedIn)
+			if (!PlayerDatas[(int)_playerId].IsLoggedIn)
 				return;
 
 			int spawnPointId = -1;
@@ -118,7 +118,7 @@ namespace WaterSumo
 			while (spawnPointId == -1);
 
 			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayersLoggedIn[(int)_playerId].MaterialId]);
+			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayerDatas[(int)_playerId].MaterialId]);
 
 
 		}

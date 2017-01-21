@@ -504,7 +504,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d,
     type: 2}
-  PlayersLoggedIn: 
+  SwimmingRingMaterials:
+  - {fileID: 2100000, guid: 77c9032ecfca006408eb72890cdf8b37, type: 2}
+  - {fileID: 2100000, guid: abdf36c8bb5842440a9d301a4fd54488, type: 2}
+  - {fileID: 2100000, guid: 7c9cb2b5e82b5714b93824ce7a34bd78, type: 2}
+  - {fileID: 2100000, guid: 26cf227c083ab36469180c0c41013513, type: 2}
 --- !u!1001 &1770507650
 Prefab:
   m_ObjectHideFlags: 0

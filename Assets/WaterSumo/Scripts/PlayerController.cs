@@ -12,7 +12,7 @@ namespace WaterSumo
 		private bool IsInitialice = false;
 		//Input
 		[SerializeField]
-		private PlayerId PlayerIdType = PlayerId.None;
+		public PlayerId PlayerIdType = PlayerId.None;
 		private string InputUpString = "";
 		private string InputRightString = "";
 		private string InputXString = "";
@@ -23,6 +23,11 @@ namespace WaterSumo
 		[SerializeField]
 		private float MaxInputVelocity = 10.0f;
 
+		//Geometry
+		[SerializeField]
+		private GameObject SwimmingRing;
+
+
 		void Awake()
 		{
 			PlayerRigidbody = GetComponent<Rigidbody>();
@@ -32,6 +37,9 @@ namespace WaterSumo
 		{
 			PlayerIdType = _playerId;
 			SetInput(_playerId);
+
+			//Set swimmingRing material
+			SwimmingRing.GetComponent<MeshRenderer>().material = _swimmingRingMaterial;
 			IsInitialice = true;
 		}
 		private void SetInput(PlayerId _playerId)
