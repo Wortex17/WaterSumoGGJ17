@@ -37,10 +37,6 @@ namespace WaterSumo
 		[SerializeField]
 		private Material[] SwimmingRingMaterials;
 
-
-		//ArenaBehaviour
-		ArenaBehaviour LocalArenaBehaviour;
-
 		private void Awake()
 		{
 			SpawnPoints = new Transform[4];
