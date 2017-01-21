@@ -51,7 +51,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4754496606825962}
-  - component: {fileID: 114279743549870416}
+  - component: {fileID: 82765053660701710}
+  - component: {fileID: 114017234354729646}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -100,6 +101,106 @@ Transform:
   m_Father: {fileID: 4698868698481316}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82765053660701710
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221295848666866}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114017234354729646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221295848666866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059e05e6cf80dc438d9e35c69e2ab36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d,
+    type: 2}
+  SwimmingRingMaterials:
+  - {fileID: 2100000, guid: 77c9032ecfca006408eb72890cdf8b37, type: 2}
+  - {fileID: 2100000, guid: abdf36c8bb5842440a9d301a4fd54488, type: 2}
+  - {fileID: 2100000, guid: 7c9cb2b5e82b5714b93824ce7a34bd78, type: 2}
+  - {fileID: 2100000, guid: 26cf227c083ab36469180c0c41013513, type: 2}
+  MenuMusic: {fileID: 8300000, guid: a76aea4ef39523e4592093e0fce5c372, type: 3}
+  InGameMusic: {fileID: 8300000, guid: 9915643a3cd95ef498a3268022e8754f, type: 3}
 --- !u!114 &114057271691910604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeatMaster: {fileID: 114168194122229242}
-  GameManager: {fileID: 114279743549870416}
+  GameManager: {fileID: 0}
   MusicAudioMixerGroup: {fileID: 24324684, guid: 0ac7fb39e445048d89688f69c2a1839a,
     type: 2}
   FXAudioMixerGroup: {fileID: 24301952, guid: 0ac7fb39e445048d89688f69c2a1839a, type: 2}
@@ -134,21 +235,3 @@ MonoBehaviour:
     rangeStart: 3.5
     rangeEnd: 7
   randomBeatsFactor: 1
---- !u!114 &114279743549870416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1221295848666866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1059e05e6cf80dc438d9e35c69e2ab36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d,
-    type: 2}
-  SwimmingRingMaterials:
-  - {fileID: 2100000, guid: 77c9032ecfca006408eb72890cdf8b37, type: 2}
-  - {fileID: 2100000, guid: abdf36c8bb5842440a9d301a4fd54488, type: 2}
-  - {fileID: 2100000, guid: 7c9cb2b5e82b5714b93824ce7a34bd78, type: 2}
-  - {fileID: 2100000, guid: 26cf227c083ab36469180c0c41013513, type: 2}
