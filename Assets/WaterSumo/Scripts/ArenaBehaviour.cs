@@ -17,11 +17,15 @@ public class ArenaBehaviour : MonoBehaviour {
         GenerateBorder();
     }
 
-	void OnValidate()
-	{
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (UnityEditor.EditorUtility.IsPersistent(this))
+            return;
 	    ModifyColl();
 	    GenerateBorder();
 	}
+#endif
 
     void GenerateBorder()
     {

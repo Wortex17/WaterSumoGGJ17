@@ -121,10 +121,14 @@ namespace WaterSumo
             ApplyVisuals();
         }
 
+#if UNITY_EDITOR
         void OnValidate()
         {
+            if (UnityEditor.EditorUtility.IsPersistent(this))
+                return;
             ApplyVisuals();
         }
+#endif
 
         void OnDrawGizmos()
         {
