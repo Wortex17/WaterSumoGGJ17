@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 136963667936224148}
   - component: {fileID: 54139770207214262}
   - component: {fileID: 114798364476559864}
+  - component: {fileID: 114951604534829900}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -210,6 +211,18 @@ MonoBehaviour:
   MoveSpeed: 5
   MaxInputVelocity: 3.5
   SwimmingRing: {fileID: 1692889221937696}
+--- !u!114 &114951604534829900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173444915553306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9864c6cd7876d4ca9299f0cc6bdf28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPushedByWaves: 1
 --- !u!136 &136963667936224148
 CapsuleCollider:
   m_ObjectHideFlags: 1

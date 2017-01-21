@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Policy;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WaterSumo
 {
@@ -15,6 +16,8 @@ namespace WaterSumo
 
         public float Radius { get { return Application.isPlaying ? RadiusCurrent : RadiusMaximum; } }
         public float InnerRadius { get { return Application.isPlaying ? InnerRadius : InnerRadiusMaximum; } }
+
+        public float CurrentLifetime01 {  get { return Mathf.InverseLerp(0f, maxLifetime, currentLifetime); } }
 
         public void Reset()
         {
@@ -95,6 +98,8 @@ namespace WaterSumo
         {
             Progress(Time.deltaTime);
             var colliders = Physics.OverlapSphere(transform.position, RadiusCurrent, layerMask);
+            
+            float strength = pushStrengthFactor * pushStrengthOverLifetime.Evaluate(CurrentLifetime01);
 
             foreach (var collider in colliders)
             {
@@ -111,15 +116,25 @@ namespace WaterSumo
                 {
                     affectedByWave = 1f;
                 }
-                body.AddForce(waveToColliderN * pushStrength * affectedByWave, ForceMode.Force);
+
+                var affected = capsuleCollider.GetComponent<WaveAffected>();
+                if (affected != null)
+                {
+                    if(affected.IsPushedByWaves)
+                        body.AddForce(waveToColliderN * strength * affectedByWave, ForceMode.Force);
+                }
             }
             ApplyVisuals();
         }
 
+#if UNITY_EDITOR
         void OnValidate()
         {
+            if (UnityEditor.EditorUtility.IsPersistent(this))
+                return;
             ApplyVisuals();
         }
+#endif
 
         void OnDrawGizmos()
         {
@@ -176,8 +191,10 @@ namespace WaterSumo
         private float waveLength = 0.2f;
         [SerializeField]
         private float waveTrailExtra = 0.2f;
+        [SerializeField, FormerlySerializedAs("pushStrength")]
+        private float pushStrengthFactor = 1f;
         [SerializeField]
-        private float pushStrength = 1f;
+        private AnimationCurve pushStrengthOverLifetime = AnimationCurve.Linear(0f, 1f, 1f, 1f);
         [SerializeField]
         private LayerMask layerMask = Physics.AllLayers;
 

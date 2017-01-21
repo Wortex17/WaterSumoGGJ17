@@ -127,8 +127,8 @@ MonoBehaviour:
   beatMode: 1
   constantBeatsPerSecond: 1
   randomBeatsWait:
-    rangeStart: 3
-    rangeEnd: 8
+    rangeStart: 3.5
+    rangeEnd: 7
   randomBeatsFactor: 1
 --- !u!114 &114279743549870416
 MonoBehaviour:

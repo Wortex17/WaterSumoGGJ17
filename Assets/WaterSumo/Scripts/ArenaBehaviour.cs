@@ -2,70 +2,110 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EShape {Capsule = 0, Box = 1}
-
-[ExecuteInEditMode]
 public class ArenaBehaviour : MonoBehaviour {
+    public enum EShape { Capsule = 0, Box = 1 }
+    
+    [SerializeField, Range(0, 100)]
+    private float ArenaSize = 1.0f;
 
-	[SerializeField, Range(0, 100)]
-	private float CapsuleColliderRadius = 0.5f;
-	[SerializeField]
-	private float CapsuleColliderHeight = 5.0f;
-
-	[SerializeField, Range(0, 100)]
-	private float BoxColliderSize = 1.0f;
-
-	private CapsuleCollider capsuleColl;
-	private BoxCollider boxColl;
-	private Collider coll;
-
-	[SerializeField]
+    [SerializeField]
 	private EShape shape;
 
-	[HideInInspector]
-	public GameObject Player;	
-	// Update is called once per frame
-	void Update () {
+	void Start ()
+    {
+        ModifyColl();
+        GenerateBorder();
+    }
 
-		ModifyColl ();
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (UnityEditor.EditorUtility.IsPersistent(this))
+            return;
+	    ModifyColl();
+	    GenerateBorder();
 	}
+#endif
 
-	void OnValidate()
-	{
-		
-	}
+    void GenerateBorder()
+    {
+        var lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+            return;
+        lineRenderer.numPositions = 0;
+        List<Vector3> positions = new List<Vector3>();
+        switch (shape)
+        {
+            case EShape.Box:
+                positions.Add(new Vector3(-1f, 0f, -1f) * ArenaSize);
+                positions.Add(new Vector3(-1f, 0f, 1f) * ArenaSize);
+                positions.Add(new Vector3(1f, 0f, 1f) * ArenaSize);
+                positions.Add(new Vector3(1f, 0f, -1f) * ArenaSize);
+                positions.Add(positions[0]);
+                lineRenderer.numPositions = 4;
+                lineRenderer.SetPositions(positions.ToArray());
+                break;
+            case EShape.Capsule:
+                int resolution = Mathf.FloorToInt(ArenaSize) * 8;
+                for (int i = 0; i <= resolution; i++)
+                {
+                    float curAngle = Mathf.InverseLerp(0, resolution, i) * 2f * Mathf.PI;
+                    Vector3 curPoint = new Vector3(Mathf.Cos(curAngle), 0f, Mathf.Sin(curAngle)) * ArenaSize;
+                    positions.Add(curPoint);
+                }
+                break;
+        }
+        lineRenderer.numPositions = positions.Count;
+        lineRenderer.SetPositions(positions.ToArray());
+    }
 
-	void ModifyColl()
+    private Collider CurrentCollider {
+        get {
+            switch (shape)
+            {
+                case EShape.Box:
+                    return boxCollider;
+                case EShape.Capsule:
+                    return capsuleCollider;
+                default:
+                    return null;
+            }
+        }
+    }
+
+    void ModifyColl()
 	{
-		switch ((int)shape)
+		switch (shape)
 		{
-		case 0:
-			if (GetComponent<BoxCollider> () != null)
-				GameObject.DestroyImmediate (GetComponent<BoxCollider> ());
-			if (GetComponent<CapsuleCollider> () == null)
-				capsuleColl = gameObject.AddComponent<CapsuleCollider> ();
-			else
-				capsuleColl = GetComponent<CapsuleCollider> ();
-			
-			capsuleColl.isTrigger = true;
-			capsuleColl.radius = CapsuleColliderRadius;
-			capsuleColl.height = CapsuleColliderHeight;
-			coll = capsuleColl;
+		    case EShape.Capsule:
+		        if (boxCollider != null)
+		        {
+		            boxCollider.enabled = false;
+                }
+		        if (capsuleCollider != null)
+                {
+                    capsuleCollider.enabled = true;
 
-			break;
-		case 1:
-			if (GetComponent<CapsuleCollider> () != null)
-				GameObject.DestroyImmediate (GetComponent<CapsuleCollider> ());
-			if (GetComponent<BoxCollider> () == null)
-				boxColl = gameObject.AddComponent<BoxCollider> ();
-			else
-				boxColl = GetComponent<BoxCollider> ();
-			
-			boxColl.isTrigger = true;
-			boxColl.size = new Vector3 (BoxColliderSize, 0.1f, BoxColliderSize);
-			coll = boxColl;
+                    capsuleCollider.isTrigger = true;
+                    capsuleCollider.radius = ArenaSize;
+                    capsuleCollider.height = 20f;
+                }
+			    break;
+		    case EShape.Box:
+                if (capsuleCollider != null)
+                {
+                    capsuleCollider.enabled = false;
+                }
 
-			break;
+                if (boxCollider != null)
+                {
+                    boxCollider.enabled = true;
+
+                    boxCollider.isTrigger = true;
+                    boxCollider.size = new Vector3(ArenaSize*2f, 20f, ArenaSize*2f);
+                }
+
+			    break;
 		}
 	}
 
@@ -73,11 +113,29 @@ public class ArenaBehaviour : MonoBehaviour {
 	{
 		Vector3 tempPlayerPos = _player.transform.position;
 		tempPlayerPos.y = 0;
-		Vector3 closestPoint = coll.ClosestPointOnBounds(tempPlayerPos * -1);
-		Vector3 distance = closestPoint - tempPlayerPos;
-		// Store Value in of x and z?
-		float x = distance.x;
-		float z = distance.z;
+		Vector3 closestPoint = CurrentCollider.ClosestPointOnBounds(tempPlayerPos * -1);
+	    Vector3 distance = closestPoint - tempPlayerPos;
+
+		switch ((int)shape) 
+		{
+		case 0:
+			if (Mathf.Abs (distance.x) > ArenaSize)
+				Destroy (_player);
+			if (Mathf.Abs (distance.z) > ArenaSize)
+				Destroy (_player);
+			break;
+		case 1:
+			if (Mathf.Abs(distance.x) > ArenaSize)
+				Destroy (_player);
+			if (Mathf.Abs(distance.z) > ArenaSize)
+				Destroy (_player);
+			break;
+		}
 		return distance;
-	}
+    }
+
+    [SerializeField]
+    private CapsuleCollider capsuleCollider = null;
+    [SerializeField]
+    private BoxCollider boxCollider = null;
 }
