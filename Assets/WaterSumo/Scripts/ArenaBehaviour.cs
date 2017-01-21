@@ -98,7 +98,7 @@ public class ArenaBehaviour : MonoBehaviour {
                     boxCollider.enabled = true;
 
                     boxCollider.isTrigger = true;
-                    boxCollider.size = new Vector3(ArenaSize, 20f, ArenaSize);
+                    boxCollider.size = new Vector3(ArenaSize*2f, 20f, ArenaSize*2f);
                 }
 
 			    break;
