@@ -7,6 +7,19 @@ namespace WaterSumo
 {
 	public enum PlayerId { Player1, Player2, Player3, Player4, None }
 
+	public struct PlayerData
+	{
+		public bool IsLoggedIn;
+		public int MaterialId;
+
+		public PlayerData(bool _isLoggedIn)
+		{
+			IsLoggedIn = _isLoggedIn;
+			MaterialId = -1;
+		}
+
+	}
+
 	public class GameManager : MonoBehaviour
 	{
 		//Player Prefab
@@ -14,18 +27,26 @@ namespace WaterSumo
 		private GameObject PlayerPrefab;
 
 		//LoggedIn states
-		public bool[] PlayersLoggedIn;
+		public PlayerData[] PlayersLoggedIn;
 
 		//SpwanPoints
 		private Transform[] SpawnPoints;
+		private bool[] SpawnPointsUsed;
+
+		//SwimmingRing Materials
+		[SerializeField]
+		private Material[] SwimmingRingMaterials;
+
 
 		private void Awake()
 		{
-			DontDestroyOnLoad(this);
 			SpawnPoints = new Transform[4];
-			PlayersLoggedIn = new bool[4];
+			PlayersLoggedIn = new PlayerData[4];
 			for (int id = 0; id < PlayersLoggedIn.Length; id++)
-				PlayersLoggedIn[id] = true;
+				PlayersLoggedIn[id] = new PlayerData(true);
+			SpawnPointsUsed = new bool[4];
+			for (int id = 0; id < SpawnPointsUsed.Length; id++)
+				SpawnPointsUsed[id] = false;
 
 
 			SceneManager.sceneLoaded += OnLevelLoaded;
@@ -41,10 +62,10 @@ namespace WaterSumo
 			switch (_actualScene.name)
 			{
 				case "MaineMenu":
-					PlayersLoggedIn[0] = true;
-					PlayersLoggedIn[1] = false;
-					PlayersLoggedIn[2] = false;
-					PlayersLoggedIn[3] = false;
+					PlayersLoggedIn[0].IsLoggedIn = true;
+					PlayersLoggedIn[1].IsLoggedIn = false;
+					PlayersLoggedIn[2].IsLoggedIn = false;
+					PlayersLoggedIn[3].IsLoggedIn = false;
 					break;
 				default:
 					StartGame();
@@ -56,6 +77,9 @@ namespace WaterSumo
 		//InGame
 		private void StartGame()
 		{
+			for (int id = 0; id < SpawnPointsUsed.Length; id++)
+				SpawnPointsUsed[id] = false;
+
 			SetPlayerSpawnPoints();
 			SpawnAllPlayer();
 		}
@@ -77,11 +101,24 @@ namespace WaterSumo
 		private void SpwanPlayer(PlayerId _playerId)
 		{
 			print("SpwanPlayer");
-			if (!PlayersLoggedIn[(int)_playerId])
+			if (!PlayersLoggedIn[(int)_playerId].IsLoggedIn)
 				return;
 
-			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[(int)_playerId].position, SpawnPoints[(int)_playerId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId);
+			int spawnPointId = -1;
+			do
+			{
+				spawnPointId = Random.Range(0, 4);
+				if (!SpawnPointsUsed[spawnPointId])
+				{
+					SpawnPointsUsed[spawnPointId] = true;
+				}
+				else
+					spawnPointId = -1;
+			}
+			while (spawnPointId == -1);
+
+			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
+			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayersLoggedIn[(int)_playerId].MaterialId]);
 
 
 		}

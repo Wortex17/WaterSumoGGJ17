@@ -28,7 +28,7 @@ namespace WaterSumo
 			PlayerRigidbody = GetComponent<Rigidbody>();
 		}
 
-		public void InitialicePlayer(PlayerId _playerId)
+		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial)
 		{
 			PlayerIdType = _playerId;
 			SetInput(_playerId);
