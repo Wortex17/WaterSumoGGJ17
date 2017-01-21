@@ -42,16 +42,25 @@ namespace WaterSumo
 			}
 			if (Input.GetButtonDown ("Controller1B"))
 				IsPlayerConnected [0] = false;
-			if(Input.GetButtonDown("Controller2A"))
+			if (Input.GetButtonDown ("Controller2A"))
+			{
+				PlayerPortraits [1].sprite = Sumo [0];
 				IsPlayerConnected [1] = true;
+			}
 			if (Input.GetButtonDown ("Controller2B"))
 				IsPlayerConnected [1] = false;
-			if(Input.GetButtonDown("Controller3A"))
+			if (Input.GetButtonDown ("Controller3A"))
+			{
+				PlayerPortraits [2].sprite = Sumo [0];
 				IsPlayerConnected [2] = true;
+			}
 			if (Input.GetButtonDown ("Controller3B"))
 				IsPlayerConnected [2] = false;
-			if(Input.GetButtonDown("Controller4A"))
+			if (Input.GetButtonDown ("Controller4A"))
+			{
+				PlayerPortraits [3].sprite = Sumo [0];
 				IsPlayerConnected [3] = true;
+			}
 			if (Input.GetButtonDown ("Controller4B"))
 				IsPlayerConnected [3] = false;
 		}
