@@ -116,18 +116,16 @@ public class ArenaBehaviour : MonoBehaviour {
 		Vector3 closestPoint = CurrentCollider.ClosestPointOnBounds(tempPlayerPos * -1);
 	    Vector3 distance = closestPoint - tempPlayerPos;
 
-		switch ((int)shape) 
+		switch (shape) 
 		{
-		case 0:
-			if (Mathf.Abs (distance.x) > ArenaSize)
-				Destroy (_player);
-			if (Mathf.Abs (distance.z) > ArenaSize)
+		case EShape.Capsule:
+			if (Mathf.Abs (distance.magnitude) > ArenaSize)
 				Destroy (_player);
 			break;
-		case 1:
-			if (Mathf.Abs(distance.x) > ArenaSize)
+		case EShape.Box:
+			if (Mathf.Abs(distance.x) > ArenaSize * 2f)
 				Destroy (_player);
-			if (Mathf.Abs(distance.z) > ArenaSize)
+			if (Mathf.Abs(distance.z) > ArenaSize * 2f)
 				Destroy (_player);
 			break;
 		}
