@@ -98,8 +98,7 @@ namespace WaterSumo
         {
             Progress(Time.deltaTime);
             var colliders = Physics.OverlapSphere(transform.position, RadiusCurrent, layerMask);
-
-            float lifetime01 = Mathf.InverseLerp(0f, maxLifetime, currentLifetime);
+            
             float strength = pushStrengthFactor * pushStrengthOverLifetime.Evaluate(CurrentLifetime01);
 
             foreach (var collider in colliders)
