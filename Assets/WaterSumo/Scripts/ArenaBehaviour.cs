@@ -110,9 +110,7 @@ public class ArenaBehaviour : MonoBehaviour {
 		Vector3 tempPlayerPos = _player.transform.position;
 		tempPlayerPos.y = 0;
 		Vector3 closestPoint = CurrentCollider.ClosestPointOnBounds(tempPlayerPos * -1);
-		Vector3 distance = closestPoint - tempPlayerPos;
-
-		Debug.Log (distance);
+	    Vector3 distance = closestPoint - tempPlayerPos;
 
 		switch ((int)shape) 
 		{
