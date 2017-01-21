@@ -87,7 +87,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1037587198215352}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e02bc052b10814549876a295c7a17266, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -104,7 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb95b486ba324a279138247d68929ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wave: {fileID: 1052794446211202, guid: f8ece1c536823af49b7f384bfbd6d2d3, type: 2}
-  minRange: 3
-  maxRange: 7
-  timeMultiplicator: 1
+  WavePrefab: {fileID: 1052794446211202, guid: f8ece1c536823af49b7f384bfbd6d2d3, type: 2}

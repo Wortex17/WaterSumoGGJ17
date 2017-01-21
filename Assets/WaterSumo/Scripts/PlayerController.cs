@@ -39,7 +39,37 @@ namespace WaterSumo
 		[HideInInspector]
 		public PickupBase ActivePickup;
 
-		
+		//Emogis
+		[Header("Emogis")]
+		[SerializeField]
+		float MinDistCloseToBounds = 1.0f;
+		//ResetTime
+		[SerializeField]
+		float ResetTimeBump = 1.0f;
+		[SerializeField]
+		float ResetTimeUsePickUp = 1.0f;
+		[SerializeField]
+		float ResetTimeShuting = 1.0f;
+		//Time to reset
+		float TimeToResetIsBump = 0.0f;
+		float TimeToResetIsUsePickup = 0.0f;
+		float TimeToResetIsShuting = 0.0f;
+		//bools
+		bool IsCloseToBounds = false;
+		bool IsBump = false;
+		bool IsUsePickup = false;
+		bool IsShuting = false;
+		//Emogis Sprite
+		[SerializeField]
+		private Sprite IsCloseToBoundsSprite;
+		[SerializeField]
+		private Sprite IsBumpSprite;
+		[SerializeField]
+		private Sprite IsUsePickupSprite;
+		[SerializeField]
+		private Sprite IsShutingSprite;
+		[SerializeField]
+		private Sprite IsRigdingWaveSprite;
 
 		void Awake()
 		{
@@ -99,10 +129,14 @@ namespace WaterSumo
 				HandleInput();
 
 				//DistanceToBorder
-				LocalArenaBehaviour.DistanceToBorder(gameObject);
-			}
-        }
+				IsCloseToBounds = (LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude < MinDistCloseToBounds);
 
+				ResetEmogisTimer();
+				HandleEmogis();
+			}
+		}
+
+		//Input Controlls
 		private void HandleInput()
 		{
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
@@ -129,19 +163,61 @@ namespace WaterSumo
 					PlayerRigidbody.velocity = PlayerRigidbody.velocity.normalized * MaxInputVelocity;
 			}
 		}
-
 		private void Shuting()
 		{
-			Debug.Log("arsch");
+			IsShuting = true;
+			TimeToResetIsShuting = Time.time + ResetTimeShuting;
 		}
-
 		private void ActivatePowerUp()
 		{
 			if (ActivePickup == null && PickupCanUse != null)
 			{
 				ActivePickup = PickupCanUse;
 				ActivePickup.ActivatePickUp(this);
+
+				IsUsePickup = true;
+				TimeToResetIsUsePickup = Time.time + ResetTimeUsePickUp;
 			}
+		}
+
+		//Emogis
+		private void HandleEmogis()
+		{
+			if(IsCloseToBounds)
+			{
+
+			}
+			else if(IsBump)
+			{
+
+			}
+			/*else if( PlayerWaveAffected.Is...)
+			{
+
+			}*/
+			else if(IsUsePickup)
+			{
+
+			}
+			else if(IsShuting)
+			{
+
+			}
+		}
+		private void ResetEmogisTimer()
+		{
+			if (IsBump && TimeToResetIsBump <= Time.time)
+				IsBump = false;
+			if (IsUsePickup && TimeToResetIsUsePickup <= Time.time)
+				IsUsePickup = false;
+			if (IsShuting && TimeToResetIsShuting <= Time.time)
+				IsShuting = false;
+		}
+
+		private void OnCollisionEnter(Collision _coll)
+		{
+			IsBump = true;
+			TimeToResetIsBump = Time.time + ResetTimeBump;
 		}
 	}
 }

@@ -37,6 +37,7 @@ namespace WaterSumo
 			{
 				PickupAudioSource.Play();
 				GetComponent<MeshRenderer>().enabled = false;
+				GetComponent<Collider>().enabled = false;
 				playerController.PickupCanUse = this;
 				transform.SetParent(_coll.transform);
 				transform.localPosition = Vector3.zero;
