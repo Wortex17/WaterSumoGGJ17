@@ -21,9 +21,6 @@ public class ArenaBehaviour : MonoBehaviour {
 
 	[SerializeField]
 	private EShape shape;
-
-	[HideInInspector]
-	public GameObject Player;	
 	// Update is called once per frame
 	void Update () {
 
@@ -74,23 +71,22 @@ public class ArenaBehaviour : MonoBehaviour {
 		tempPlayerPos.y = 0;
 		Vector3 closestPoint = coll.ClosestPointOnBounds(tempPlayerPos * -1);
 		Vector3 distance = closestPoint - tempPlayerPos;
-		// Store Value in of x and z?
-		float x = distance.x;
-		float z = distance.z;
+
+		Debug.Log (distance);
 
 		switch ((int)shape) 
 		{
 		case 0:
-			if (Mathf.Abs (DistanceToBorder (Player).x) > CapsuleColliderRadius)
-				Destroy (Player);
-			if (Mathf.Abs (DistanceToBorder (Player).z) > CapsuleColliderRadius)
-				Destroy (Player);
+			if (Mathf.Abs (distance.x) > CapsuleColliderRadius)
+				Destroy (_player);
+			if (Mathf.Abs (distance.z) > CapsuleColliderRadius)
+				Destroy (_player);
 			break;
 		case 1:
-			if (Mathf.Abs(DistanceToBorder (Player).x) > BoxColliderSize)
-				Destroy (Player);
-			if (Mathf.Abs(DistanceToBorder (Player).z) > BoxColliderSize)
-				Destroy (Player);
+			if (Mathf.Abs(distance.x) > BoxColliderSize)
+				Destroy (_player);
+			if (Mathf.Abs(distance.z) > BoxColliderSize)
+				Destroy (_player);
 			break;
 		}
 		return distance;
