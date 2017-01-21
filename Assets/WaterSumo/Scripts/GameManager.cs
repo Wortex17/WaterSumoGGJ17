@@ -15,7 +15,7 @@ namespace WaterSumo
 		public PlayerData(bool _isLoggedIn)
 		{
 			IsLoggedIn = _isLoggedIn;
-			MaterialId = -1;
+			MaterialId = 0;
 		}
 
 	}
