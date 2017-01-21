@@ -5,16 +5,14 @@ using UnityEngine;
 namespace WaterSumo
 {
 
-	public enum InputType { None, Controller1, Controller2, Controller3, Controller4 }
-
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerController : MonoBehaviour
 	{
 		private Rigidbody PlayerRigidbody;
-
+		private bool IsInitialice = false;
 		//Input
 		[SerializeField]
-		private InputType PlayerInputType = InputType.None;
+		private PlayerId PlayerIdType = PlayerId.None;
 		private string InputUpString = "";
 		private string InputRightString = "";
 		private string InputXString = "";
@@ -28,29 +26,34 @@ namespace WaterSumo
 		void Awake()
 		{
 			PlayerRigidbody = GetComponent<Rigidbody>();
-			SetInput(PlayerInputType);
 		}
 
-		private void SetInput(InputType _inputType)
+		public void InitialicePlayer(PlayerId _playerId)
 		{
-			switch (_inputType)
+			PlayerIdType = _playerId;
+			SetInput(_playerId);
+			IsInitialice = true;
+		}
+		private void SetInput(PlayerId _playerId)
+		{
+			switch (_playerId)
 			{
-				case InputType.Controller1:
+				case PlayerId.Player1:
 					InputUpString = "Controller1Up";
 					InputRightString = "Controller1Right";
 					InputXString = "Controller1X";
 					break;
-				case InputType.Controller2:
+				case PlayerId.Player2:
 					InputUpString = "Controller2Up";
 					InputRightString = "Controller2Right";
 					InputXString = "Controller2X";
 					break;
-				case InputType.Controller3:
+				case PlayerId.Player3:
 					InputUpString = "Controller3Up";
 					InputRightString = "Controller3Right";
 					InputXString = "Controller3X";
 					break;
-				case InputType.Controller4:
+				case PlayerId.Player4:
 					InputUpString = "Controller4Up";
 					InputRightString = "Controller4Right";
 					InputXString = "Controller4X";
@@ -60,7 +63,10 @@ namespace WaterSumo
 
 		void Update()
 		{
-			HandleInput();
+			if (IsInitialice)
+			{
+				HandleInput();
+			}
         }
 
 		private void HandleInput()
@@ -69,9 +75,9 @@ namespace WaterSumo
 			if (Input.GetButtonDown(InputXString))
 				Shuting();
         }
-
 		private void HandleMovement(float _upInput, float _rightInput)
 		{
+			Debug.Log(transform.name + " up: " + _upInput);
 			Vector3 moveDirection = new Vector3(-_rightInput, 0.0f, _upInput);
 			float actualVelocityMagnitude = PlayerRigidbody.velocity.magnitude;
 

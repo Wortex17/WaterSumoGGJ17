@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/WaterSumo/Scenes/Levels/FreeForAll.unity
+  - enabled: 1
+    path: Assets/WaterSumo/Scenes/Levels/Rectangle.unity

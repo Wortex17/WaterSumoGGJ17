@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace WaterSumo
 {
     /**
      * Central HUB for the game components.
      * */
+	[RequireComponent(typeof(GameManager))]
     public class GameHUB : MonoBehaviour
-    {
+	{
 
-        public GameHUB Instance
+        static public GameHUB Instance
         {
             get
             {
@@ -29,6 +29,13 @@ namespace WaterSumo
         }
 
         public GameObject NullModule;
+		public GameManager GetGameManager()
+		{
+			if (GameManagerInstance == null)
+				GameManagerInstance = GetComponent<GameManager>();
+
+			return GameManagerInstance;
+		}
 
         protected void Awake()
         {
@@ -57,5 +64,7 @@ namespace WaterSumo
 
         private bool isShared = false;
         private static GameHUB sharedInstance = null;
-    }
+		private GameManager GameManagerInstance = null;
+
+	}
 }

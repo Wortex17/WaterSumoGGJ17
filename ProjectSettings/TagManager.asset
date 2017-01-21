@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SpawnPoint1
+  - SpawnPoint2
+  - SpawnPoint3
+  - SpawnPoint4
   layers:
   - Default
   - TransparentFX
