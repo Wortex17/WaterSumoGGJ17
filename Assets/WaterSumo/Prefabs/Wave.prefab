@@ -83,8 +83,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoDestroy: 0
-  maxSize: 20
-  maxLifetime: 5
+  maxSize: 23
+  maxLifetime: 4.5
   waveLength: 0.35
   waveTrailExtra: 0.2
   pushStrength: 2.95
@@ -152,7 +152,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.9
+      scalar: 1.005
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -603,7 +603,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     type: 11
-    radius: 10
+    radius: 11.5
     angle: 25
     length: 5
     boxX: 1
