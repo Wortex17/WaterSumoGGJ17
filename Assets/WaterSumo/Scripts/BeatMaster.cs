@@ -20,12 +20,19 @@ public class BeatMaster : MonoBehaviour {
     {
         recordedTime = 0f;
         beatCount = -1;
+        lastBeatTime = 0f;
+        nextBeatTime = delayFirstBeat;
     }
 
 
     void OnEnable()
     {
         RecollectBeatReceivers();
+    }
+
+    void Start()
+    {
+        ResetProgress();
     }
 	
 	// Update is called once per frame
@@ -61,7 +68,7 @@ public class BeatMaster : MonoBehaviour {
                 if (receiver.ExpectedBeat <= beatCount)
                 {
                     receiver.ReceiveBeat(beatCount);
-                } else if (receiver.ExpectedBeat == beatCount+1 && receiver.PreviewBeat < timeToNextBeat)
+                } else if (receiver.ExpectedBeat == beatCount+1 && receiver.PreviewBeat > timeToNextBeat)
                 {
                     receiver.ReceiveBeat(beatCount+1);
                 }
@@ -69,6 +76,8 @@ public class BeatMaster : MonoBehaviour {
         }
     }
 
+
+    [SerializeField] private float delayFirstBeat = 1f;
     [SerializeField]
     private BeatMode beatMode = BeatMode.Constant;
 
