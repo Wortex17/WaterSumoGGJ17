@@ -27,10 +27,13 @@ namespace WaterSumo
 		[SerializeField]
 		private GameObject SwimmingRing;
 
+		//ArenaBehaviour
+		private ArenaBehaviour LocalArenaBehaviour;
 
 		void Awake()
 		{
 			PlayerRigidbody = GetComponent<Rigidbody>();
+			LocalArenaBehaviour = FindObjectOfType<ArenaBehaviour>();
 		}
 
 		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial)
@@ -74,6 +77,9 @@ namespace WaterSumo
 			if (IsInitialice)
 			{
 				HandleInput();
+
+				//DistanceToBorder
+				LocalArenaBehaviour.DistanceToBorder(gameObject);
 			}
         }
 
