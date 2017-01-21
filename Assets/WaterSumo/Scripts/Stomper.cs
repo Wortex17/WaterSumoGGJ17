@@ -9,17 +9,23 @@ public class Stomper : MonoBehaviour {
 
 	private float stompingTimer = 0;
 
-	[SerializeField]
-	private float stompingInterval = 1;
+    [SerializeField]
+    private int minRange = 2;
+    [SerializeField]
+    private int maxRange = 10;
+
+    private float stompingInterval;
 
 	[SerializeField]
 	private float timeMultiplicator;
 
 	void Start () {
 
-		// TODO: Get the wave reference by code or drag an drop in inspector?!
+        // TODO: Get the wave reference by code or drag an drop in inspector?!
 
-	}
+        //Start with random Timer
+        stompingInterval = Random.Range(minRange, maxRange);
+    }
 	
 	void Update () {
 
@@ -36,6 +42,9 @@ public class Stomper : MonoBehaviour {
 	{
 		// Create waves?!?!
 		Instantiate(Wave);
+
+        //Calculate new Interval after each wave
+        stompingInterval = Random.Range(minRange, maxRange);
 
 		// TODO: Add some Coordinates for instantiating maybe?
 		Debug.Log("BinDrin");

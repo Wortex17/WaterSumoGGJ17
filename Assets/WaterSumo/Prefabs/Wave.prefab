@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052794446211202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4359930356116000}
@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1739016448720420}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.852, y: 0.1, z: 0.852}
+  m_LocalScale: {x: 0.625, y: 0.1, z: 0.625}
   m_Children: []
   m_Father: {fileID: 4738318888463808}
   m_RootOrder: 1
@@ -189,9 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2710cd29bee846d4ea5fdb182accd2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 10
+  maxSize: 20
   maxLifetime: 5
-  waveLength: 0.148
-  pushStrength: 0.8
+  waveLength: 0.375
+  pushStrength: 2.95
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   innerSphere: {fileID: 1739016448720420}
   outerSphere: {fileID: 1332279903806646}

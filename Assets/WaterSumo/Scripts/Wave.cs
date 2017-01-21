@@ -22,6 +22,7 @@ namespace WaterSumo
             {
                 Reset();
                 enabled = false;
+                StartCoroutine(FadeTo(0.0f, 0.5f));               
                 return;
             }
 
@@ -31,6 +32,27 @@ namespace WaterSumo
             Vector3 scale = Vector3.one*currentSize;
             scale.y = 0.1f;
             transform.localScale = scale;
+        }
+
+        IEnumerator FadeTo(float aValue, float aTime)
+        {
+            float alphaOuter = outerSphere.GetComponent<Renderer>().material.color.a;
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alphaOuter, aValue, t));
+                outerSphere.GetComponent<Renderer>().material.color = newColor;
+                yield return null;
+            }
+            float alphaInner = innerSphere.GetComponent<Renderer>().material.color.a;
+            for (float t = 0.0f; t<1.0f; t += Time.deltaTime / aTime)
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alphaInner, aValue, t));
+                innerSphere.GetComponent<Renderer>().material.color = newColor;
+                yield return null;
+            }
+
+            DestroyImmediate(outerSphere);
+            DestroyImmediate(innerSphere);
         }
 
         void Start()
