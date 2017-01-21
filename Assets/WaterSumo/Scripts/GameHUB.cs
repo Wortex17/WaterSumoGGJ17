@@ -58,7 +58,6 @@ namespace WaterSumo
 
         private bool isShared = false;
         private static GameHUB sharedInstance = null;
-		private GameManager GameManagerInstance = null;
 
 	}
 }

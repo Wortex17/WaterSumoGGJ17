@@ -124,8 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382b7940040a9e94aa11b708d437a8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatMode: 0
+  beatMode: 1
   constantBeatsPerSecond: 1
+  randomBeatsWait:
+    rangeStart: 3
+    rangeEnd: 8
+  randomBeatsFactor: 1
 --- !u!114 &114279743549870416
 MonoBehaviour:
   m_ObjectHideFlags: 1

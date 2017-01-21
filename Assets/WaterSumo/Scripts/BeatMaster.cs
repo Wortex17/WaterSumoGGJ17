@@ -6,7 +6,8 @@ public class BeatMaster : MonoBehaviour {
     
     public enum BeatMode
     {
-        Constant
+        Constant,
+        Random
     }
 
     public void RecollectBeatReceivers()
@@ -41,6 +42,9 @@ public class BeatMaster : MonoBehaviour {
 
             switch (beatMode)
             {
+                case BeatMode.Random:
+                    nextBeatTime += randomBeatsWait.GetRandomValue()*randomBeatsFactor;
+                    break;
                 case BeatMode.Constant:
                 default:
                     nextBeatTime = lastBeatTime + (constantBeatsPerSecond > 0f ? 1f / constantBeatsPerSecond : 1f);
@@ -70,6 +74,10 @@ public class BeatMaster : MonoBehaviour {
 
     [SerializeField]
     private float constantBeatsPerSecond = 1f;
+    [MinMaxRange(0.1f, 120f), SerializeField]
+    private MinMaxRange randomBeatsWait = new MinMaxRange();
+    [SerializeField]
+    private float randomBeatsFactor = 1f;
 
     private int beatCount = -1;
     private float recordedTime = 0f;
