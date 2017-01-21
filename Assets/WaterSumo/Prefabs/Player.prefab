@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec2c62b9bd3f9247b279e484a0f2c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerWaveAffected: {fileID: 0}
   PlayerIdType: 4
   MoveSpeed: 5
   MaxInputVelocity: 3.5

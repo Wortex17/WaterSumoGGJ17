@@ -10,6 +10,8 @@ namespace WaterSumo
         public float WavePushAffection = 1f;
         public bool RidesOnWaveSlope = true;
 
+        public float buoyancyOffset = 0.5f;
+
         public bool HasConsumedWave
         {
             get { return hasConsumedWave; }
@@ -33,27 +35,45 @@ namespace WaterSumo
 
             if (RidesOnWaveSlope)
             {
-                float slopeHeight = wave.GetSlopeHeight(waveVector.magnitude);
-                Vector3 position = this.transform.position;
-
-                //var ray = new Ray();
-                //Physics.Raycast()
-
-                //GetComponent<Rigidbody>().AddForce(Vector3.up * slopeHeight, ForceMode.Acceleration);
-
-                this.transform.position = position;
+                slopeHeight = wave.GetSlopeHeight(waveVector.magnitude);
             }
 
             hasConsumedWave = true;
+            hasConsumedWaveLock = true;
+        }
+
+        protected void FixedUpdate()
+        {
+            if (RidesOnWaveSlope && slopeHeight > 0f)
+            {
+                var rigidBody = GetComponent<Rigidbody>();
+                if (rigidBody != null)
+                {
+                    //Cancel out gravity
+                    rigidBody.AddForce(-Physics.gravity, ForceMode.Acceleration);
+                }
+                Debug.Log(slopeHeight);
+                transform.position = new Vector3(transform.position.x, buoyancyOffset + slopeHeight, transform.position.z);
+
+            }
         }
 
         protected void LateUpdate()
         {
-            hasConsumedWave = false;
+            if (hasConsumedWaveLock)
+            {
+                hasConsumedWaveLock = false;
+            }
+            else
+            {
+                hasConsumedWave = false;
+                slopeHeight = 0f;
+            }
         }
 
-
+        private float slopeHeight = 0f;
         private bool hasConsumedWave = false;
+        private bool hasConsumedWaveLock = false;
     }
 
 }
