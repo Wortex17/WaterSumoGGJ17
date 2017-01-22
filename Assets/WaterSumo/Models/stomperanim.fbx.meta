@@ -64,6 +64,7 @@ ModelImporter:
     7400002: Armature.004|Start/Idle
     7400004: Armature.004|Stomp
     7400006: Cylinder006|Start/Idle
+    7400008: Cylinder006|Stomp
     9500000: //RootNode
     13700000: Cylinder006
   materials:
