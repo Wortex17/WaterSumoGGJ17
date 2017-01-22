@@ -10,15 +10,23 @@ namespace WaterSumo
 		{
 			base.ActivatePickUp(_playerController);
 
-			_playerController.PlayerWaveAffected.IsPushedByWaves = false;
-		}
+            wasPushedByWaves = _playerController.PlayerWaveAffected.IsPushedByWaves;
+            _playerController.PlayerWaveAffected.IsPushedByWaves = false;
+
+            wasRidingOnWaveSlope = _playerController.PlayerWaveAffected.RidesOnWaveSlope;
+            _playerController.PlayerWaveAffected.RidesOnWaveSlope = false;
+        }
 
 		override public void DeactivatePickUp(PlayerController _playerController)
 		{
 			base.DeactivatePickUp(_playerController);
 
-			_playerController.PlayerWaveAffected.IsPushedByWaves = true;
+            _playerController.PlayerWaveAffected.IsPushedByWaves = wasPushedByWaves;
+            _playerController.PlayerWaveAffected.RidesOnWaveSlope = wasRidingOnWaveSlope;
 
-		}
-	}
+        }
+
+        private bool wasPushedByWaves = false;
+        private bool wasRidingOnWaveSlope = false;
+    }
 }
