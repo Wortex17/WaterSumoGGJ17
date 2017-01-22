@@ -14,7 +14,7 @@ namespace WaterSumo
 		{
 			base.ActivatePickUp(_playerController);
 
-			Instantiate(WavePrefab, transform.position, transform.rotation);
+			Instantiate(WavePrefab, transform.position, WavePrefab.transform.rotation);
 			DeactivatePickUp(_playerController);
 		}
 	}
