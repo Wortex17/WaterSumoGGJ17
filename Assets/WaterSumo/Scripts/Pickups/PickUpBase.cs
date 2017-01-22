@@ -12,6 +12,8 @@ namespace WaterSumo
 		private Sprite PickupSprite;
 		private AudioSource PickupAudioSource;
 
+        public bool PickUpCollected;
+
 		virtual protected void Start()
 		{
 			PickupAudioSource = GetComponent<AudioSource>();
@@ -46,6 +48,7 @@ namespace WaterSumo
 					playerController.PickupCanUse = this;
 					transform.SetParent(_coll.transform);
 					transform.localPosition = Vector3.zero;
+                    PickUpCollected = true;
 				}
 				else
 					Destroy(gameObject);
