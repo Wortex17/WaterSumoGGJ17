@@ -54,6 +54,8 @@ namespace WaterSumo
 		private bool IsGameStartet = false;
 		private bool IsGameOver= false;
 
+	    public bool IsDebugEndless = false;
+
 		private void Awake()
 		{
 			GameManagerAudioSource = GetComponent<AudioSource>();
@@ -79,7 +81,7 @@ namespace WaterSumo
 		private void Update()
 		{
 
-			if (IsGameStartet && PlayerArePlaying <= 1)
+			if (!IsDebugEndless && IsGameStartet && PlayerArePlaying <= 1)
 				GameOver();
 			if (IsGameOver && Input.GetButtonDown("ControllerStart"))
 				BackToSelectMenu();
