@@ -105,7 +105,7 @@ MonoBehaviour:
       tangentMode: 1
     - serializedVersion: 2
       time: 1
-      value: 0.23
+      value: 0.21
       inSlope: -0.3059993
       outSlope: -0.3059993
       tangentMode: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  waveSlopeFactor: 1.2
+  waveSlopeFactor: 0.8
   waveParticleSystem: {fileID: 198086343447872134}
 --- !u!198 &198086343447872134
 ParticleSystem:
