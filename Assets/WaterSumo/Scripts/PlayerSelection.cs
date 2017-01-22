@@ -139,6 +139,19 @@ namespace WaterSumo
 		{
 			if (Input.GetButtonDown ("ControllerStart"))
 			{
+			    int players = 0;
+			    if (GameHUB.Instance.GameManager != null && GameHUB.Instance.GameManager.PlayerDatas != null)
+                {
+                    foreach (var gameManagerPlayerData in GameHUB.Instance.GameManager.PlayerDatas)
+                    {
+                        if (gameManagerPlayerData.IsLoggedIn)
+                        {
+                            players++;
+                        }
+                    }
+                }
+			    if (players < 2)
+			        return;
 				SceneManager.LoadScene (LevelNames [LevelID]);
 			}
 		}

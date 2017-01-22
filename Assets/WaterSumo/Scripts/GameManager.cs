@@ -120,7 +120,6 @@ namespace WaterSumo
 					StartGame();
 					break;
 			}
-			Debug.Log("OnLevelLoaded");
 		}
 
 		private void PlayMusic(AudioClip _audioClip)
