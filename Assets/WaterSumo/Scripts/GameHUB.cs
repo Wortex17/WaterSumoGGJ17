@@ -29,10 +29,11 @@ namespace WaterSumo
             }
         }
 
-	    public BeatMaster BeatMaster;
-	    public GameManager GameManager;
+        public GameManager GameManager;
+        public BeatMaster BeatMaster;
+        public SharedSoundProfile SoundLibrary;
 
-		public AudioMixerGroup MusicAudioMixerGroup;
+        public AudioMixerGroup MusicAudioMixerGroup;
 		public AudioMixerGroup FXAudioMixerGroup;
 
 
