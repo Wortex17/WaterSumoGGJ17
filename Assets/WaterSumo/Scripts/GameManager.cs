@@ -124,8 +124,11 @@ namespace WaterSumo
 
 		private void PlayMusic(AudioClip _audioClip)
 		{
-			GameManagerAudioSource.clip = _audioClip;
-			GameManagerAudioSource.Play();
+		    if (GameManagerAudioSource != null)
+            {
+                GameManagerAudioSource.clip = _audioClip;
+                GameManagerAudioSource.Play();
+            }
 		}
 
 		//InGame
