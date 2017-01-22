@@ -1213,14 +1213,14 @@ MonoBehaviour:
   ResetTimeBump: 1
   ResetTimeUsePickUp: 1
   ResetTimeShuting: 1
-  IsCloseToBoundsSprite: {fileID: 21300000, guid: 7b8428ba14d4dd14197714ec96c1f925,
+  IsCloseToBoundsSprite: {fileID: 21300000, guid: b1479b3ec07d0e648b11130ccbc67ff3,
     type: 3}
-  IsBumpSprite: {fileID: 21300000, guid: 7b8428ba14d4dd14197714ec96c1f925, type: 3}
-  IsRigdingWaveSprite: {fileID: 21300000, guid: 7b8428ba14d4dd14197714ec96c1f925,
+  IsBumpSprite: {fileID: 21300000, guid: 6b89ad26ab6fb8446b92fe42438fc0c3, type: 3}
+  IsRigdingWaveSprite: {fileID: 21300000, guid: c9694a045b1c5be4ba8c6ea3d5307903,
     type: 3}
-  IsUsePickupSprite: {fileID: 21300000, guid: 7b8428ba14d4dd14197714ec96c1f925, type: 3}
-  IsShutingSprite: {fileID: 21300000, guid: 7b8428ba14d4dd14197714ec96c1f925, type: 3}
-  IdleSprite: {fileID: 21300000, guid: b1479b3ec07d0e648b11130ccbc67ff3, type: 3}
+  IsUsePickupSprite: {fileID: 21300000, guid: 5e290e6e2077cac46b510b592c724450, type: 3}
+  IsShutingSprite: {fileID: 21300000, guid: cfd30330724814e4e8b08cbe658cbd38, type: 3}
+  IdleSprite: {fileID: 21300000, guid: 5d620dd9c7a3fa8428a4e0cfd4b2db6f, type: 3}
 --- !u!114 &114951604534829900
 MonoBehaviour:
   m_ObjectHideFlags: 1
