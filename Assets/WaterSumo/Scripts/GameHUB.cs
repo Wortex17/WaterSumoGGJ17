@@ -32,6 +32,7 @@ namespace WaterSumo
         public GameManager GameManager;
         public BeatMaster BeatMaster;
         public SharedSoundProfile SoundLibrary;
+	    public SkinLibrary SkinLibrary;
 
         public AudioMixerGroup MusicAudioMixerGroup;
 		public AudioMixerGroup FXAudioMixerGroup;

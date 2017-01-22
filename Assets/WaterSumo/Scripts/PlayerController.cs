@@ -31,12 +31,16 @@ namespace WaterSumo
 		[SerializeField]
 		public float MaxInputVelocity = 10.0f;
 
-		//Geometry
-		[SerializeField]
-		private GameObject SwimmingRing;
+        //Geometry
+        [SerializeField]
+        private GameObject SwimmingRing;
+        [SerializeField]
+        private GameObject CharacterModel;
 
-		//Powerup
-		[HideInInspector]
+        public int SkinId = 0;
+
+        //Powerup
+        [HideInInspector]
 		public PickupBase PickupCanUse;
 		[HideInInspector]
 		public PickupBase ActivePickup;
@@ -103,6 +107,10 @@ namespace WaterSumo
 			SetInput(_playerId);
 
             SoundSource.outputAudioMixerGroup = GameHUB.Instance.FXAudioMixerGroup;
+
+            SwimmingRing.GetComponentInChildren<Renderer>().material = GameHUB.Instance.SkinLibrary.RingSkins[(int)_playerId];
+		    var characterModelRenderer = CharacterModel.GetComponentInChildren<Renderer>();
+            characterModelRenderer.material = GameHUB.Instance.SkinLibrary.SumoSkins[SkinId];
 
             IsInitialice = true;
 		}
