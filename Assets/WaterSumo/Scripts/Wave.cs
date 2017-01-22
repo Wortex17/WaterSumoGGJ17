@@ -50,7 +50,7 @@ namespace WaterSumo
 
         public float GetSlopeHeightLocal(float distance01)
         {
-            return waveSlope.Evaluate(distance01);
+            return waveSlope.Evaluate(distance01) * waveSlopeFactor;
         }
 
         public float GetSlopeHeight(float distance)
@@ -212,6 +212,8 @@ namespace WaterSumo
 
         [SerializeField]
         private AnimationCurve waveSlope = AnimationCurve.Linear(0f, 1f, 1f, 1f);
+        [SerializeField]
+        private float waveSlopeFactor = 0.5f;
         [SerializeField]
         private ParticleSystem waveParticleSystem;
     }

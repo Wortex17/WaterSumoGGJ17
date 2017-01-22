@@ -42,6 +42,8 @@ namespace WaterSumo
 		//Emogis
 		[Header("Emogis")]
 		[SerializeField]
+		private SpriteRenderer EmogisSpriteRenderer;
+		[SerializeField]
 		float MinDistCloseToBounds = 1.0f;
 		//ResetTime
 		[SerializeField]
@@ -65,11 +67,14 @@ namespace WaterSumo
 		[SerializeField]
 		private Sprite IsBumpSprite;
 		[SerializeField]
+		private Sprite IsRigdingWaveSprite;
+		[SerializeField]
 		private Sprite IsUsePickupSprite;
 		[SerializeField]
 		private Sprite IsShutingSprite;
 		[SerializeField]
-		private Sprite IsRigdingWaveSprite;
+		private Sprite IdleSprite;
+
 
 		void Awake()
 		{
@@ -130,7 +135,7 @@ namespace WaterSumo
 
 				//DistanceToBorder
 				IsCloseToBounds = (LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude < MinDistCloseToBounds);
-
+				Debug.Log(LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude);
 				ResetEmogisTimer();
 				HandleEmogis();
 			}
@@ -184,25 +189,18 @@ namespace WaterSumo
 		private void HandleEmogis()
 		{
 			if(IsCloseToBounds)
-			{
-
-			}
+				SetEmogi(IsCloseToBoundsSprite);
 			else if(IsBump)
-			{
-
-			}
-			/*else if( PlayerWaveAffected.Is...)
-			{
-
-			}*/
+				SetEmogi(IsBumpSprite);
+			else if( PlayerWaveAffected.IsRidingOnWave)
+				SetEmogi(IsRigdingWaveSprite);
 			else if(IsUsePickup)
-			{
-
-			}
+				SetEmogi(IsUsePickupSprite);
 			else if(IsShuting)
-			{
+				SetEmogi(IsShutingSprite);
+			else
+				SetEmogi(IdleSprite);
 
-			}
 		}
 		private void ResetEmogisTimer()
 		{
@@ -212,6 +210,13 @@ namespace WaterSumo
 				IsUsePickup = false;
 			if (IsShuting && TimeToResetIsShuting <= Time.time)
 				IsShuting = false;
+		}
+		private void SetEmogi(Sprite _sprite)
+		{
+			if(EmogisSpriteRenderer.sprite != _sprite)
+			{
+				EmogisSpriteRenderer.sprite = _sprite;
+			}
 		}
 
 		private void OnCollisionEnter(Collision _coll)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,30 +9,49 @@ public class Stomper : BeatReceiver {
 	[SerializeField, FormerlySerializedAs("Wave")]
 	private GameObject WavePrefab;
 
-    /*
-	void Start () {
-
-        // TODO: Get the wave reference by code or drag an drop in inspector?!
-
-        //Start with random Timer
-        stompingInterval = Random.Range(minRange, maxRange);
+    protected override float GetBeatPreview()
+    {
+        return rawStompTime/speed;
     }
-	
-	void Update () {
 
-		stompingTimer += Time.deltaTime * timeMultiplicator;
+    protected void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
-		if (stompingTimer >= stompingInterval)
-			Stomp();
-	}
-    */
+    protected void Update()
+    {
+        animator.speed = speed;
+
+        if (stompCountdown > 0f)
+        {
+            stompCountdown -= Time.deltaTime * speed;
+            if (stompCountdown <= stompEarly)
+            {
+                stompCountdown = 0f;
+                Stomp();
+            }
+        }
+    }
+    
     protected override void OnBeat(int beat)
     {
-        Stomp();
+        stompCountdown = rawStompTime;
+        animator.SetTrigger("stomp");
     }
 
     public void Stomp()
     {
         Instantiate(WavePrefab, transform.position, Quaternion.identity, this.transform);
     }
+
+    [SerializeField]
+    private float rawStompTime = 0f;
+    [SerializeField]
+    private float stompEarly = 0f;
+    [SerializeField]
+    private float speed = 1f;
+    private float stompCountdown = 0f;
+
+    private Animator animator = null;
 }
