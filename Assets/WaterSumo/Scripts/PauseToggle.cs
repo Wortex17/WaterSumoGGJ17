@@ -18,7 +18,7 @@ public class PauseToggle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetButton("PlayerControllerStart"))
+		if(Input.GetButtonDown("ControllerStart"))
 			{
 				stopTheTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiime = !stopTheTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiime;
 			}
