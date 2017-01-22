@@ -80,7 +80,7 @@ namespace WaterSumo
 		{
 			if (IsPlayerConnected [_arrayIndex])
 			{
-				if (Input.GetAxis (_Axis1) == 0 && !IsPictureTaken [_arrayIndex])
+				if (Input.GetAxis (_Axis1) == 0 && IsPictureTaken [_arrayIndex])
 					LockInput [_arrayIndex] = false;
 				if (Input.GetAxis (_Axis1) > 0 && !LockInput[_arrayIndex])
 				{
