@@ -561,7 +561,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7856f99dcbf1a4e9c9f689c7e1a0cde0, type: 3}
   - {fileID: 21300000, guid: 64d886c11f96e46b4913b174b9e44393, type: 3}
   - {fileID: 21300000, guid: e41f11fc032724b0392260316dbff8ba, type: 3}
-  IsDebugEndless: 1
+  IsDebugEndless: 0
 --- !u!114 &114057271691910604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -690,23 +690,23 @@ MonoBehaviour:
       outSlope: -0
       tangentMode: 69
     - serializedVersion: 2
-      time: 9
+      time: 7
       value: 1
       inSlope: 0
-      outSlope: 0.5
-      tangentMode: 69
+      outSlope: 0.023399133
+      tangentMode: 5
     - serializedVersion: 2
       time: 10
       value: 1.5
-      inSlope: 0.5
+      inSlope: 0.44675857
       outSlope: 0.05050638
-      tangentMode: 69
+      tangentMode: 65
     - serializedVersion: 2
       time: 20.076288
       value: 2.0089169
       inSlope: 0.05050638
       outSlope: 0.06167958
-      tangentMode: 5
+      tangentMode: 69
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
