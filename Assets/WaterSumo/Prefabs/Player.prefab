@@ -1203,6 +1203,7 @@ MonoBehaviour:
   MaxInputVelocity: 4
   SwimmingRing: {fileID: 1638687527998962}
   CharacterModel: {fileID: 1916186259186796}
+  CharacterModelRenderer: {fileID: 137324920308815032}
   SkinId: 0
   PickupCanUse: {fileID: 0}
   ActivePickup: {fileID: 0}

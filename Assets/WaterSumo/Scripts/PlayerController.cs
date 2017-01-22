@@ -36,6 +36,8 @@ namespace WaterSumo
         private GameObject SwimmingRing;
         [SerializeField]
         private GameObject CharacterModel;
+        [SerializeField]
+        private Renderer CharacterModelRenderer;
 
         public int SkinId = 0;
 
@@ -109,8 +111,7 @@ namespace WaterSumo
             SoundSource.outputAudioMixerGroup = GameHUB.Instance.FXAudioMixerGroup;
 
             SwimmingRing.GetComponentInChildren<Renderer>().material = GameHUB.Instance.SkinLibrary.RingSkins[(int)_playerId];
-		    var characterModelRenderer = CharacterModel.GetComponentInChildren<Renderer>();
-            characterModelRenderer.material = GameHUB.Instance.SkinLibrary.SumoSkins[SkinId];
+            CharacterModelRenderer.material = GameHUB.Instance.SkinLibrary.SumoSkins[SkinId];
 
             IsInitialice = true;
 		}
