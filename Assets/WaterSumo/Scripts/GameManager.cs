@@ -140,7 +140,10 @@ namespace WaterSumo
 			SpawnAllPlayer();
 
 			IsGameStartet = true;
-		}
+            GameHUB.Instance.BeatMaster.ResetProgress();
+            GameHUB.Instance.BeatMaster.enabled = true;
+
+        }
 		private void SetPlayerSpawnPoints()
 		{
 			SpawnPoints[0] = GameObject.FindGameObjectWithTag("SpawnPoint1").transform;
@@ -245,6 +248,8 @@ namespace WaterSumo
 				int imageId = PlayerDatas[(int)playerId].MaterialId;
 				HUDInstanz.WinPlayerImage.sprite = CharacterSprite[imageId];
 				IsGameOver = true;
+
+			    GameHUB.Instance.BeatMaster.enabled = false;
 			}
 		}
 

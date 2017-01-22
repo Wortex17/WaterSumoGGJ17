@@ -551,11 +551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1059e05e6cf80dc438d9e35c69e2ab36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefabs:
-  - {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d, type: 2}
-  - {fileID: 1173444915553306, guid: 3698c82d2734ee7449d992a9337d6145, type: 2}
-  - {fileID: 1173444915553306, guid: 1ee6cc471153df14e82e8f8601dc4aad, type: 2}
-  - {fileID: 1173444915553306, guid: c1dce951b956c284bb926148e936d4a5, type: 2}
   PlayerPrefab: {fileID: 1173444915553306, guid: e98a5439ae0240640b9937845660937d,
     type: 2}
   MenuMusic: {fileID: 8300000, guid: a76aea4ef39523e4592093e0fce5c372, type: 3}
