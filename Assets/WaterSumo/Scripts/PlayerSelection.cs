@@ -80,9 +80,9 @@ namespace WaterSumo
 		{
 			if (IsPlayerConnected [_arrayIndex])
 			{
-				if (Input.GetAxis (_Axis1) == 0 && IsPictureTaken [_arrayIndex])
+				if (Input.GetAxis (_Axis1) < 0.2f && Input.GetAxis (_Axis1) > -0.2f && IsPictureTaken [_arrayIndex])
 					LockInput [_arrayIndex] = false;
-				if (Input.GetAxis (_Axis1) > 0 && !LockInput[_arrayIndex])
+				if (Input.GetAxis (_Axis1) > 0.2f && !LockInput[_arrayIndex])
 				{
 					_id++;
 
@@ -99,7 +99,7 @@ namespace WaterSumo
 					PlayerPortraits [_arrayIndex].sprite = Sumo [_id];
 					LockInput[_arrayIndex] = true;
 				}
-				if (Input.GetAxis (_Axis1) < 0 && !LockInput[_arrayIndex])
+				if (Input.GetAxis (_Axis1) < -0.2f && !LockInput[_arrayIndex])
 				{
 					_id--;
 
