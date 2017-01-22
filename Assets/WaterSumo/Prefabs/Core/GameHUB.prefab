@@ -239,3 +239,33 @@ MonoBehaviour:
     rangeStart: 3.5
     rangeEnd: 7
   randomBeatsFactor: 1
+  beatLevelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 9
+      value: 1
+      inSlope: 0
+      outSlope: 0.5
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 10
+      value: 1.5
+      inSlope: 0.5
+      outSlope: 0.05050638
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 20.076288
+      value: 2.0089169
+      inSlope: 0.05050638
+      outSlope: 0.06167958
+      tangentMode: 5
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

@@ -67,10 +67,10 @@ public class BeatMaster : MonoBehaviour {
             {
                 if (receiver.ExpectedBeat <= beatCount)
                 {
-                    receiver.ReceiveBeat(beatCount);
+                    receiver.ReceiveBeat(beatCount, beatLevelCurve.Evaluate(beatCount));
                 } else if (receiver.ExpectedBeat == beatCount+1 && receiver.PreviewBeat > timeToNextBeat)
                 {
-                    receiver.ReceiveBeat(beatCount+1);
+                    receiver.ReceiveBeat(beatCount+1, beatLevelCurve.Evaluate(beatCount));
                 }
             }
         }
@@ -87,6 +87,9 @@ public class BeatMaster : MonoBehaviour {
     private MinMaxRange randomBeatsWait = new MinMaxRange();
     [SerializeField]
     private float randomBeatsFactor = 1f;
+
+    [SerializeField, Tooltip("How the beatLevel (strength) is at each beat")]
+    private AnimationCurve beatLevelCurve = AnimationCurve.Linear(0f, 1f, 1f, 1f);
 
     private int beatCount = -1;
     private float recordedTime = 0f;

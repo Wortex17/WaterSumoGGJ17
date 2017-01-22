@@ -149,7 +149,7 @@ namespace WaterSumo
 
 		private void PlayerDie(GameObject _player)
 		{
-			GameHUB.Instance.GameManager.PlayerArePlaying--;
+			GameHUB.Instance.GameManager.PlayersArePlaying--;
 			Destroy(_player);
 		}
 

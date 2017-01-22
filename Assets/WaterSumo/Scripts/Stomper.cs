@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using WaterSumo;
 
 public class Stomper : BeatReceiver {
 
@@ -34,15 +35,17 @@ public class Stomper : BeatReceiver {
         }
     }
     
-    protected override void OnBeat(int beat)
+    protected override void OnBeat(int beat, float beatWeight)
     {
         stompCountdown = rawStompTime;
+        stompStrength = beatWeight;
         animator.SetTrigger("stomp");
     }
 
     public void Stomp()
     {
-        Instantiate(WavePrefab, transform.position, Quaternion.identity, this.transform);
+        var waveGO = Instantiate(WavePrefab.gameObject, transform.position, Quaternion.identity, this.transform);
+        waveGO.GetComponent<Wave>().OverallStrength = stompStrength;
     }
 
     [SerializeField]
@@ -51,6 +54,8 @@ public class Stomper : BeatReceiver {
     private float stompEarly = 0f;
     [SerializeField]
     private float speed = 1f;
+
+    private float stompStrength = 1f;
     private float stompCountdown = 0f;
 
     private Animator animator = null;
