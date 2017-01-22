@@ -29,11 +29,11 @@ namespace WaterSumo
 		private bool[] SpawnPointsUsed;
 
 		//PlayerPrefabs
-		[SerializeField]
-		private GameObject[] PlayerPrefabs;
+        [SerializeField]
+        private GameObject PlayerPrefab;
 
-		//Sounds
-		private AudioSource GameManagerAudioSource;
+        //Sounds
+        private AudioSource GameManagerAudioSource;
 		[Header("Music")]
 		[SerializeField]
 		private AudioClip MenuMusic;
@@ -178,8 +178,9 @@ namespace WaterSumo
 			}
 			while (spawnPointId == -1);
 
-			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefabs[PlayerDatas[(int)_playerId].MaterialId], SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
+			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
             var playerController = newPlayer.GetComponent<PlayerController>();
+		    playerController.SkinId = PlayerDatas[(int) _playerId].MaterialId;
             playerController.InitialicePlayer(_playerId, HUDInstanz);
 
 		    var profiles = GameHUB.Instance.SoundLibrary.SumoProfiles;
@@ -188,7 +189,7 @@ namespace WaterSumo
 		    int trial = 0;
 		    do
 		    {
-		        profile = GameHUB.Instance.SoundLibrary.SumoProfiles.GetRandom();
+		        profile = profiles.GetRandom();
 		        soundProfileInUse = false;
 
 		        foreach (var player in otherPlayers)
