@@ -795,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Overlay: {fileID: 1253778901393750}
+  HUD: {fileID: 1055764738927928}
 --- !u!114 &114604830237657900
 MonoBehaviour:
   m_ObjectHideFlags: 1

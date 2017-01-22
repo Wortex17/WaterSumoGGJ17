@@ -7,6 +7,8 @@ public class PauseToggle : MonoBehaviour {
 	private bool stopTheTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiime = false;
 	[SerializeField]
 	private GameObject Overlay;
+	[SerializeField]
+	private GameObject HUD;
 
 	// Use this for initialization
 	void Awake () {
@@ -27,11 +29,13 @@ public class PauseToggle : MonoBehaviour {
 		{
 			Time.timeScale = 0;
 			Overlay.SetActive (true);
+			HUD.SetActive(false);
 		} 
 		else
 		{
 			Time.timeScale = 1;
 			Overlay.SetActive (false);
+			HUD.SetActive(true);
 		}
 
 	}

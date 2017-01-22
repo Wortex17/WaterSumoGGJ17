@@ -24,7 +24,6 @@ namespace WaterSumo
 	{
 		//LoggedIn states
 		public PlayerData[] PlayerDatas;
-
 		//SpwanPoints
 		private Transform[] SpawnPoints;
 		private bool[] SpawnPointsUsed;
@@ -49,7 +48,10 @@ namespace WaterSumo
 		[SerializeField]
 		private Sprite[] CharacterSprite;
 
-
+		//GameStats
+		[HideInInspector]
+		public int PlayerArePlaying = 0;
+		private bool IsGameStartet = false;
 
 		private void Awake()
 		{
@@ -67,10 +69,16 @@ namespace WaterSumo
 
 			SceneManager.sceneLoaded += OnLevelLoaded;
 		}
+		private void Start()
+		{
+			GameManagerAudioSource.outputAudioMixerGroup = GameHUB.Instance.MusicAudioMixerGroup;
+
+		}
 
 		private void Update()
 		{
-
+			if (IsGameStartet && PlayerArePlaying <= 1)
+				GameOver();
 		}
 
 		private void OnLevelLoaded(Scene _actualScene, LoadSceneMode _loadSceneMode)
@@ -82,6 +90,8 @@ namespace WaterSumo
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
+					PlayerArePlaying = 0;
+					IsGameStartet = false;
 					PlayMusic(MenuMusic);
 					break;
 				case "CharacterSelection":
@@ -89,6 +99,8 @@ namespace WaterSumo
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
+					PlayerArePlaying = 0;
+					IsGameStartet = false;
 					PlayMusic(MenuMusic);
 					break;
 				default:
@@ -114,6 +126,8 @@ namespace WaterSumo
 			PlayMusic(InGameMusic);
 			SetPlayerSpawnPoints();
 			SpawnAllPlayer();
+
+			IsGameStartet = true;
 		}
 		private void SetPlayerSpawnPoints()
 		{
@@ -152,7 +166,6 @@ namespace WaterSumo
 			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, HUDInstanz);
 		}
 
-
 		private void SpawnHUD()
 		{
 			GameObject newHUD = Instantiate(HUDPrefab, new Vector3(9000.0f, 9000.0f, 9000.0f), Quaternion.identity);
@@ -179,6 +192,11 @@ namespace WaterSumo
 				HUDInstanz.SetEnableCharacter(PlayerId.Player4, true);
 				HUDInstanz.SetCharacterImage(PlayerId.Player4, CharacterSprite[PlayerDatas[3].MaterialId]);
 			}
+		}
+
+		private void GameOver()
+		{
+			Debug.Log("GameOver");
 		}
 	}
 }
