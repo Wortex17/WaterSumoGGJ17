@@ -18,6 +18,7 @@ public class Stomper : BeatReceiver {
     protected void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected void Update()
@@ -46,6 +47,7 @@ public class Stomper : BeatReceiver {
     {
         var waveGO = Instantiate(WavePrefab.gameObject, transform.position, Quaternion.identity, this.transform);
         waveGO.GetComponent<Wave>().OverallStrength = stompStrength;
+        audioSource.PlayOneShot(GameHUB.Instance.SoundLibrary.Stomps.GetRandom());
     }
 
     [SerializeField]
@@ -59,4 +61,5 @@ public class Stomper : BeatReceiver {
     private float stompCountdown = 0f;
 
     private Animator animator = null;
+    private AudioSource audioSource = null;
 }
