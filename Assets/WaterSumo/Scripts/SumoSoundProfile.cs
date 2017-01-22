@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SumoSoundProfile : MonoBehaviour
+public class SumoSoundProfile : SoundProfileBehaviour
 {
     public List<AudioClip> Shouts;
 }

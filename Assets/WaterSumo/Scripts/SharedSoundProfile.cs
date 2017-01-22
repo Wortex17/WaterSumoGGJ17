@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharedSoundProfile : MonoBehaviour
+public class SharedSoundProfile : SoundProfileBehaviour
 {
     public List<AudioClip> SumoBumps = new List<AudioClip>();
     public List<AudioClip> Stomps = new List<AudioClip>();

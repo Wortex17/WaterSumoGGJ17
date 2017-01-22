@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4666548642469058}
   - component: {fileID: 114252227937805284}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Sumo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4660253835015732}
   m_Layer: 0
-  m_Name: SumpProfiles
+  m_Name: SumoProfiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1553b07fec3865a4ba81f3be08fbaecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SumoBumps: []
+  SumoBumps:
+  - {fileID: 8300000, guid: 2dc17510decb5514d84fbf4076e3039c, type: 3}
+  - {fileID: 8300000, guid: 1911e63577d1962479b29b7cb33baa48, type: 3}
+  - {fileID: 8300000, guid: fa607ff80332a6441bc2567761f1bed2, type: 3}
+  - {fileID: 8300000, guid: 5da197380bbfbc146837a582de77c0eb, type: 3}
+  - {fileID: 8300000, guid: 3d4fbcf8189bff14f8edffb7a2943cca, type: 3}
+  - {fileID: 8300000, guid: 1e07e744d0159f04ebdc1e8be38f293d, type: 3}
   Stomps: []
   SumoProfiles: []
 --- !u!114 &114168194122229242
@@ -385,4 +391,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c093b1de90b9bb1498d1a4ef0f3d07b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shouts: []
+  Shouts:
+  - {fileID: 8300000, guid: 89436ca491a1b1a4bbc3438787306c9a, type: 3}
+  - {fileID: 8300000, guid: b771433023fbf2046b38a0f5844fe755, type: 3}
+  - {fileID: 8300000, guid: e4519b4001bb166478c745b98eded55b, type: 3}
+  - {fileID: 8300000, guid: 9b11813964c9c2d41b2b8341aa4c0f4a, type: 3}
+  - {fileID: 8300000, guid: 0c10a3816d571824c80352f51ffe04a5, type: 3}
+  - {fileID: 8300000, guid: ede7c0fe1fd31d24d97b7eec7268d93e, type: 3}
+  - {fileID: 8300000, guid: d286af940afa81348acd93266565e4c9, type: 3}
+  - {fileID: 8300000, guid: 7d65f3c732c344e45be30959c81f240e, type: 3}
+  - {fileID: 8300000, guid: 23ab06409a04c91408c3b2a8c3fae3a2, type: 3}
+  - {fileID: 8300000, guid: 5a0b12c6a99d0024fa88420a95a029d4, type: 3}
+  - {fileID: 8300000, guid: 07fcb20d2b46a8243871966da1aa3ce1, type: 3}
+  - {fileID: 8300000, guid: 2eb2858e4921fc2489a8235880d6afbb, type: 3}

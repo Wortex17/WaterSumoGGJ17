@@ -13,7 +13,9 @@ namespace WaterSumo
 		private ArenaBehaviour LocalArenaBehaviour;
 		[HideInInspector]
 		public WaveAffected PlayerWaveAffected;
-		private bool IsInitialice = false;
+        [HideInInspector]
+        public AudioSource SoundSource;
+        private bool IsInitialice = false;
 		//Input
 		[SerializeField]
 		public PlayerId PlayerIdType = PlayerId.None;
@@ -82,8 +84,9 @@ namespace WaterSumo
 		{
 			PlayerRigidbody = GetComponent<Rigidbody>();
 			LocalArenaBehaviour = FindObjectOfType<ArenaBehaviour>();
-			PlayerWaveAffected = GetComponent<WaveAffected>();
-		}
+            PlayerWaveAffected = GetComponent<WaveAffected>();
+            SoundSource = GetComponent<AudioSource>();
+        }
 
 		public void InitialicePlayer(PlayerId _playerId, HUD _gameHud)
 		{
@@ -91,7 +94,10 @@ namespace WaterSumo
 
 			PlayerIdType = _playerId;
 			SetInput(_playerId);
-			IsInitialice = true;
+
+            SoundSource.outputAudioMixerGroup = GameHUB.Instance.FXAudioMixerGroup;
+
+            IsInitialice = true;
 		}
 		private void SetInput(PlayerId _playerId)
 		{
@@ -226,9 +232,9 @@ namespace WaterSumo
 
 		private void OnCollisionEnter(Collision _coll)
 		{
-			///////////////////////////////////////////// Sound Collison
+            SoundSource.PlayOneShot(GameHUB.Instance.SoundLibrary.SumoBumps.GetRandom());
 
-			IsBump = true;
+            IsBump = true;
 			TimeToResetIsBump = Time.time + ResetTimeBump;
 		}
 	}
