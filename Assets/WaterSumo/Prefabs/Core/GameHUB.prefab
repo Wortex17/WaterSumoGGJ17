@@ -202,9 +202,9 @@ MonoBehaviour:
   HUDPrefab: {fileID: 1765388401899696, guid: bade5dda050278245bc55eb9fea66163, type: 2}
   CharacterSprite:
   - {fileID: 21300000, guid: 9d0f91af49fc440e7a28cf55a3a4e717, type: 3}
-  - {fileID: 21300000, guid: 9d0f91af49fc440e7a28cf55a3a4e717, type: 3}
-  - {fileID: 21300000, guid: 9d0f91af49fc440e7a28cf55a3a4e717, type: 3}
-  - {fileID: 21300000, guid: 9d0f91af49fc440e7a28cf55a3a4e717, type: 3}
+  - {fileID: 21300000, guid: 7856f99dcbf1a4e9c9f689c7e1a0cde0, type: 3}
+  - {fileID: 21300000, guid: 64d886c11f96e46b4913b174b9e44393, type: 3}
+  - {fileID: 21300000, guid: e41f11fc032724b0392260316dbff8ba, type: 3}
 --- !u!114 &114057271691910604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeatMaster: {fileID: 114168194122229242}
-  GameManager: {fileID: 0}
+  GameManager: {fileID: 114017234354729646}
   MusicAudioMixerGroup: {fileID: 24324684, guid: 0ac7fb39e445048d89688f69c2a1839a,
     type: 2}
   FXAudioMixerGroup: {fileID: 24301952, guid: 0ac7fb39e445048d89688f69c2a1839a, type: 2}

@@ -22,12 +22,17 @@ namespace WaterSumo
 		private int[] id = new int[4];
 
 		private bool[] LockInput = new bool[4];
-		
-		
+		private bool[] BlockEverything = new bool[4];
+
+
 		// Update is called once per frame
-		void Update () {
+		void Update ()
+		{
 	
-			DetectPlayers ();
+			DetectPlayers ("Controller1A","Controller1B",0);
+			DetectPlayers ("Controller2A","Controller2B",1);
+			DetectPlayers ("Controller3A","Controller3B",2);
+			DetectPlayers ("Controller4A","Controller4B",3);
 			Select ("Controller1Right", "Controller1X", 0, ref id[0]);
 			Select ("Controller2Right", "Controller2X", 1, ref id[1]);
 			Select ("Controller3Right", "Controller3X", 2, ref id[2]);
@@ -35,83 +40,58 @@ namespace WaterSumo
 	
 		}
 	
-		void DetectPlayers()
+		void DetectPlayers(string _inputA, string _inputB, int _arrayIndex)
 		{
-			if (Input.GetButtonDown ("Controller1A"))
-			{
-				IsPlayerConnected [0] = true;
-				PlayerPortraits [0].enabled = true;
-				PlayerPortraits [0].sprite = Sumo [0];
+			if (Input.GetButtonDown (_inputA))
+				{
+				IsPlayerConnected [_arrayIndex] = true;
+				PlayerPortraits [_arrayIndex].enabled = true;
+				for (int i = 0; i < 4; i++)
+				{
+					if (!IsPictureTaken[i])
+					{
+						PlayerPortraits[_arrayIndex].sprite = Sumo[i];
+						break;
+					}
+				}
 
 			}
-			if (Input.GetButtonDown ("Controller1B"))
-				IsPlayerConnected [0] = false;
-			
-			if (Input.GetButtonDown ("Controller2A"))
-			{
-				PlayerPortraits [1].sprite = Sumo [0];
-				PlayerPortraits [1].enabled = true;
-				IsPlayerConnected [1] = true;
-			}
-			if (Input.GetButtonDown ("Controller2B"))
-				IsPlayerConnected [1] = false;
-			
-			if (Input.GetButtonDown ("Controller3A"))
-			{
-				PlayerPortraits [2].sprite = Sumo [0];
-				PlayerPortraits [2].enabled = true;
-				IsPlayerConnected [2] = true;
-			}
-			if (Input.GetButtonDown ("Controller3B"))
-				IsPlayerConnected [2] = false;
-			
-			if (Input.GetButtonDown ("Controller4A"))
-			{
-				PlayerPortraits [3].sprite = Sumo [0];
-				PlayerPortraits [3].enabled = true;
-				IsPlayerConnected [3] = true;
-			}
-			if (Input.GetButtonDown ("Controller4B"))
-				IsPlayerConnected [3] = false;
+			if (Input.GetButtonDown (_inputB))
+				IsPlayerConnected [_arrayIndex] = false;
 		}
 
 
 		void Select(string _Axis1, string _ButtonX1, int _arrayIndex, ref int _id)
 		{
-			if (IsPlayerConnected [_arrayIndex])
+			if (IsPlayerConnected [_arrayIndex] && !BlockEverything[_arrayIndex])
 			{
-				if (Input.GetAxis (_Axis1) < 0.2f && Input.GetAxis (_Axis1) > -0.2f && IsPictureTaken [_arrayIndex])
+				if (Input.GetAxis (_Axis1) < 0.2f && Input.GetAxis (_Axis1) > -0.2f )
 					LockInput [_arrayIndex] = false;
 				if (Input.GetAxis (_Axis1) > 0.2f && !LockInput[_arrayIndex])
 				{
-					_id++;
-
-					if (_id == 4)
-						_id = 0;
-
-					if (IsPictureTaken [_id])
+					do
+					{
 						_id++;
-					
-					if (_id == 4)
-						_id = 0;
 
+						if (_id == 4)
+							_id = 0;
+					}
+					while (IsPictureTaken[_id]);
 
 					PlayerPortraits [_arrayIndex].sprite = Sumo [_id];
 					LockInput[_arrayIndex] = true;
 				}
 				if (Input.GetAxis (_Axis1) < -0.2f && !LockInput[_arrayIndex])
 				{
-					_id--;
 
-					if (_id == -1)
-						_id = 3;
-
-					if (IsPictureTaken [_id])
+					do
+					{
 						_id--;
 
-					if (_id == -1)
-						_id = 3;
-
+						if (_id == -1)
+							_id = 3;
+					}
+					while (IsPictureTaken[_id]);
 
 					PlayerPortraits [_arrayIndex].sprite = Sumo [_id];
 					LockInput[_arrayIndex] = true;
@@ -121,16 +101,13 @@ namespace WaterSumo
 				if (Input.GetButtonDown (_ButtonX1))
 				{
 					IsPictureTaken [_id] = true;
+					BlockEverything[_arrayIndex] = true;
 					GameHUB.Instance.GameManager.PlayerDatas [_arrayIndex].IsLoggedIn = true;
 					GameHUB.Instance.GameManager.PlayerDatas [_arrayIndex].MaterialId = _id;
 					LockInput[_arrayIndex] = true;
 				}
 			}
-			}
- 
- 
- 
-
 		}
+	}
 }
 
