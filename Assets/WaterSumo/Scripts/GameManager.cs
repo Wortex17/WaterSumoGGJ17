@@ -66,22 +66,22 @@ namespace WaterSumo
 			GameManagerAudioSource = GetComponent<AudioSource>();
 			GameManagerAudioSource.playOnAwake = false;
 			GameManagerAudioSource.loop = true;
-
-			SpawnPoints = new Transform[4];
-			PlayerDatas = new PlayerData[4];
-			for (int id = 0; id < PlayerDatas.Length; id++)
-				PlayerDatas[id] = new PlayerData(true);
-			SpawnPointsUsed = new bool[4];
-			for (int id = 0; id < SpawnPointsUsed.Length; id++)
-				SpawnPointsUsed[id] = false;
-
-			SceneManager.sceneLoaded += OnLevelLoaded;
 		}
 		private void Start()
 		{
 			GameManagerAudioSource.outputAudioMixerGroup = GameHUB.Instance.MusicAudioMixerGroup;
 
-		}
+            SpawnPoints = new Transform[4];
+            PlayerDatas = new PlayerData[4];
+            for (int id = 0; id < PlayerDatas.Length; id++)
+                PlayerDatas[id] = new PlayerData(true);
+            SpawnPointsUsed = new bool[4];
+            for (int id = 0; id < SpawnPointsUsed.Length; id++)
+                SpawnPointsUsed[id] = false;
+
+            SceneManager.sceneLoaded += OnLevelLoaded;
+
+        }
 
 		private void Update()
 		{
