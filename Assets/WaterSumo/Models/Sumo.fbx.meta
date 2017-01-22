@@ -73,6 +73,16 @@ ModelImporter:
     7400004: Armature|Idle
     7400006: Armature|IdleLiegend
     7400008: Armature|IdleLiegend.001
+    7400010: Armature|Angry
+    7400012: Armature|AngryVariation
+    7400014: Armature|BumpVariation
+    7400016: Armature|Idleliegend
+    7400018: Armature|IdleLiegendVariation
+    7400020: Armature|SchwimmenLinksPaddeln
+    7400022: Armature|SchwimmenRechtspaddeln
+    7400024: Armature|SchwimmenVorne
+    7400026: Armature|SumoDance
+    7400028: Armature|Surfing
     9500000: //RootNode
     13700000: Plane
   materials:

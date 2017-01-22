@@ -85,14 +85,12 @@ namespace WaterSumo
 			PlayerWaveAffected = GetComponent<WaveAffected>();
 		}
 
-		public void InitialicePlayer(PlayerId _playerId, Material _swimmingRingMaterial, HUD _gameHud)
+		public void InitialicePlayer(PlayerId _playerId, HUD _gameHud)
 		{
 			GameHUD = _gameHud;
 
 			PlayerIdType = _playerId;
 			SetInput(_playerId);
-			//Set swimmingRing material
-			SwimmingRing.GetComponent<MeshRenderer>().material = _swimmingRingMaterial;
 			IsInitialice = true;
 		}
 		private void SetInput(PlayerId _playerId)
@@ -140,7 +138,6 @@ namespace WaterSumo
 				float distToBounds = LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude;
 				IsCloseToBounds = (distToBounds < MinDistCloseToBounds);
 				GameHUD.SetDistToBounds(PlayerIdType, distToBounds);
-				Debug.Log(LocalArenaBehaviour.DistanceToBorder(gameObject).magnitude);
 				ResetEmogisTimer();
 				HandleEmogis();
 			}

@@ -37,13 +37,18 @@ namespace WaterSumo
 			PlayerController playerController = _coll.GetComponent<PlayerController>();
 			if(playerController)
 			{
-				playerController.GameHUD.SetPickup(playerController.PlayerIdType, PickupSprite);
-				PickupAudioSource.Play();
-				GetComponent<MeshRenderer>().enabled = false;
-				GetComponent<Collider>().enabled = false;
-				playerController.PickupCanUse = this;
-				transform.SetParent(_coll.transform);
-				transform.localPosition = Vector3.zero;
+				if (playerController.PickupCanUse == null)
+				{
+					playerController.GameHUD.SetPickup(playerController.PlayerIdType, PickupSprite);
+					PickupAudioSource.Play();
+					GetComponent<MeshRenderer>().enabled = false;
+					GetComponent<Collider>().enabled = false;
+					playerController.PickupCanUse = this;
+					transform.SetParent(_coll.transform);
+					transform.localPosition = Vector3.zero;
+				}
+				else
+					Destroy(gameObject);
 			}
 		}
 	}

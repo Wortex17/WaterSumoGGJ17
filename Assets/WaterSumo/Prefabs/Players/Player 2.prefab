@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 114798364476559864}
   - component: {fileID: 114951604534829900}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -846,7 +846,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911926559674444}
-  m_LocalRotation: {x: -0.030001128, y: 0.7260003, z: -0.6851863, w: -0.050429877}
+  m_LocalRotation: {x: -0.030001124, y: 0.72600037, z: -0.6851864, w: -0.05042987}
   m_LocalPosition: {x: 0.0000000018626451, y: 0.57655007, z: 0.000000014901161}
   m_LocalScale: {x: 1, y: 0.9999997, z: 1.0000002}
   m_Children:
@@ -1018,7 +1018,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 108e7ec4ffba8e344bcc1d8247698dcc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1093,6 +1093,7 @@ MonoBehaviour:
   SwimmingRing: {fileID: 1692889221937696}
   PickupCanUse: {fileID: 0}
   ActivePickup: {fileID: 0}
+  GameHUD: {fileID: 0}
   EmogisSpriteRenderer: {fileID: 212505132506580382}
   MinDistCloseToBounds: 5
   ResetTimeBump: 1
@@ -1120,6 +1121,7 @@ MonoBehaviour:
   IsPushedByWaves: 1
   WavePushAffection: 1
   RidesOnWaveSlope: 1
+  buoyancyOffset: 0.5
 --- !u!136 &136963667936224148
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1146,7 +1148,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b265b899953b47f4f92fbef2d05810b0, type: 2}
+  - {fileID: 2100000, guid: a4371a4da60cef445a479a7396a45e56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

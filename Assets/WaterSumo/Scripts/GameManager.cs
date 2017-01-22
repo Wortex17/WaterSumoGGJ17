@@ -22,10 +22,6 @@ namespace WaterSumo
 	[RequireComponent(typeof(AudioSource))]
 	public class GameManager : MonoBehaviour
 	{
-		//Player Prefab
-		[SerializeField]
-		private GameObject PlayerPrefab;
-
 		//LoggedIn states
 		public PlayerData[] PlayerDatas;
 
@@ -33,9 +29,9 @@ namespace WaterSumo
 		private Transform[] SpawnPoints;
 		private bool[] SpawnPointsUsed;
 
-		//SwimmingRing Materials
+		//PlayerPrefabs
 		[SerializeField]
-		private Material[] SwimmingRingMaterials;
+		private GameObject[] PlayerPrefabs;
 
 		//Sounds
 		private AudioSource GameManagerAudioSource;
@@ -152,8 +148,8 @@ namespace WaterSumo
 			}
 			while (spawnPointId == -1);
 
-			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, SwimmingRingMaterials[PlayerDatas[(int)_playerId].MaterialId], HUDInstanz);
+			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefabs[PlayerDatas[(int)_playerId].MaterialId], SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
+			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, HUDInstanz);
 		}
 
 

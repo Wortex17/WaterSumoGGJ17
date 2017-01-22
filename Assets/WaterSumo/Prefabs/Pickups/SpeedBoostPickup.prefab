@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15709f95bcd944d4ca577f8a6f6ed308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PickupSprite: {fileID: 21300000, guid: d5992d85e13bf404ca4d3d862f3fb634, type: 3}
   ActiveTime: 2
   AddSpeedBoost: 5
   AddMaxSpeedBoost: 10
