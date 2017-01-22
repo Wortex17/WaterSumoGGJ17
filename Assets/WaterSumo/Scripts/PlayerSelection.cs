@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace WaterSumo
 {
@@ -24,11 +25,17 @@ namespace WaterSumo
 		private bool[] LockInput = new bool[4];
 		private bool[] BlockEverything = new bool[4];
 
+		[SerializeField]
+		private string[] LevelNames;
+
+		[SerializeField]
+		private Text LevelNameDisplay;
+
+		private int LevelID = 0;
 
 		// Update is called once per frame
 		void Update ()
 		{
-	
 			DetectPlayers ("Controller1A","Controller1B",0);
 			DetectPlayers ("Controller2A","Controller2B",1);
 			DetectPlayers ("Controller3A","Controller3B",2);
@@ -37,6 +44,8 @@ namespace WaterSumo
 			Select ("Controller2Right", "Controller2X", 1, ref id[1]);
 			Select ("Controller3Right", "Controller3X", 2, ref id[2]);
 			Select ("Controller4Right", "Controller4X", 3, ref id[3]);
+			Levelselect ();
+			StartGame ();
 	
 		}
 	
@@ -106,6 +115,31 @@ namespace WaterSumo
 					GameHUB.Instance.GameManager.PlayerDatas [_arrayIndex].MaterialId = _id;
 					LockInput[_arrayIndex] = true;
 				}
+			}
+		}
+
+		void Levelselect()
+		{
+			LevelNameDisplay.text = LevelNames [LevelID];
+			if (Input.GetButtonDown ("ControllerRB"))
+			{
+				LevelID++;
+				if(LevelID == 2)
+					LevelID = 0;
+			}
+			if (Input.GetButtonDown ("ControllerLB"))
+			{
+				LevelID--;
+				if(LevelID == -1)
+					LevelID = 1;
+			}
+		}
+
+		void StartGame()
+		{
+			if (Input.GetButtonDown ("ControllerStart"))
+			{
+				SceneManager.LoadScene (LevelNames [LevelID]);
 			}
 		}
 	}
