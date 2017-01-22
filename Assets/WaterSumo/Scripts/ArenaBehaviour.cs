@@ -11,6 +11,8 @@ public class ArenaBehaviour : MonoBehaviour {
     [SerializeField]
 	private EShape shape;
 
+	private Vector3 closestPo;
+
 	void Start ()
     {
         ModifyColl();
@@ -108,28 +110,36 @@ public class ArenaBehaviour : MonoBehaviour {
 			    break;
 		}
 	}
-
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere (closestPo, 1);
+	}
 	public Vector3 DistanceToBorder(GameObject _player)
 	{
 		Vector3 tempPlayerPos = _player.transform.position;
 		tempPlayerPos.y = 0;
-		Vector3 closestPoint = CurrentCollider.ClosestPointOnBounds(tempPlayerPos * -1);
-	    Vector3 distance = closestPoint - tempPlayerPos;
+
+		Vector3 dirToPlayer = tempPlayerPos - CurrentCollider.bounds.center;
+		dirToPlayer = dirToPlayer.normalized * 10000.0f;
+		Vector3 closestPointToColl = CurrentCollider.ClosestPointOnBounds (dirToPlayer);
+		closestPo = closestPointToColl;
+		Vector3 finalDir = closestPointToColl - tempPlayerPos;
 
 		switch (shape) 
 		{
 		case EShape.Capsule:
-			if (Mathf.Abs (distance.magnitude) > ArenaSize)
+			CapsuleCollider temp = (CapsuleCollider)CurrentCollider;
+			if (temp.radius - Vector3.Distance(tempPlayerPos,temp.bounds.center) < 0)
 				Destroy (_player);
 			break;
 		case EShape.Box:
-			if (Mathf.Abs(distance.x) > ArenaSize * 2f)
+			if (Mathf.Abs(finalDir.x) <= 0.06f)
 				Destroy (_player);
-			if (Mathf.Abs(distance.z) > ArenaSize * 2f)
+			if (Mathf.Abs(finalDir.z) <= 0.06f)
 				Destroy (_player);
 			break;
 		}
-		return distance;
+		return finalDir;
     }
 
     [SerializeField]
