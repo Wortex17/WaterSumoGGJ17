@@ -43,6 +43,13 @@ namespace WaterSumo
 		[HideInInspector]
 		public HUD GameHUD;
 
+	    public SumoSoundProfile SoundProfile
+        {
+            get { return soundProfile; }
+            set { soundProfile = value; }
+        }
+	    private SumoSoundProfile soundProfile = null;
+
 		//Emogis
 		[Header("Emogis")]
 		[SerializeField]
@@ -178,10 +185,12 @@ namespace WaterSumo
 		}
 		private void Shouting()
 		{
-			///////////////////////////////////////////// Sound shouting
-
-			IsShouting = true;
-			TimeToResetIsShuting = Time.time + ResetTimeShuting;
+		    if (!IsShouting && SoundProfile != null)
+            {
+                SoundSource.PlayOneShot(SoundProfile.Shouts.GetRandom());
+                IsShouting = true;
+                TimeToResetIsShuting = Time.time + ResetTimeShuting;
+            }
 		}
 		private void ActivatePowerUp()
 		{

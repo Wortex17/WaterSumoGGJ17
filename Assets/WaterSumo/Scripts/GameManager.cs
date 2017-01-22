@@ -161,7 +161,9 @@ namespace WaterSumo
 		{
 			if (!PlayerDatas[(int)_playerId].IsLoggedIn)
 				return;
-			playersArePlaying++;
+		    var otherPlayers = FindObjectsOfType<PlayerController>();
+
+            playersArePlaying++;
 
 			int spawnPointId = -1;
 			do
@@ -177,7 +179,33 @@ namespace WaterSumo
 			while (spawnPointId == -1);
 
 			GameObject newPlayer = (GameObject)Instantiate(PlayerPrefabs[PlayerDatas[(int)_playerId].MaterialId], SpawnPoints[spawnPointId].position, SpawnPoints[spawnPointId].rotation);
-			newPlayer.GetComponent<PlayerController>().InitialicePlayer(_playerId, HUDInstanz);
+            var playerController = newPlayer.GetComponent<PlayerController>();
+            playerController.InitialicePlayer(_playerId, HUDInstanz);
+
+		    var profiles = GameHUB.Instance.SoundLibrary.SumoProfiles;
+            SumoSoundProfile profile = null;
+            bool soundProfileInUse = false;
+		    int trial = 0;
+		    do
+		    {
+		        profile = GameHUB.Instance.SoundLibrary.SumoProfiles.GetRandom();
+		        soundProfileInUse = false;
+
+		        foreach (var player in otherPlayers)
+		        {
+		            if (player != null && player.SoundProfile == profile)
+		            {
+		                soundProfileInUse = true;
+		                break;
+		            }
+		        }
+		        trial++;
+
+		    } while (soundProfileInUse && trial < 100);
+
+		    playerController.SoundProfile = profile;
+
+
 		}
 
 		private void SpawnHUD()

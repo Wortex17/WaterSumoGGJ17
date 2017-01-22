@@ -332,7 +332,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1e07e744d0159f04ebdc1e8be38f293d, type: 3}
   Stomps:
   - {fileID: 8300000, guid: dc3df176123d69f42af64913163c9ee8, type: 3}
-  SumoProfiles: []
+  SumoProfiles:
+  - {fileID: 114252227937805284}
 --- !u!114 &114168194122229242
 MonoBehaviour:
   m_ObjectHideFlags: 1
