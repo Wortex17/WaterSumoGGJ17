@@ -25,7 +25,7 @@ namespace WaterSumo
 		private Text Player3DistToBoundsText;
 		[SerializeField]
 		private Text Player4DistToBoundsText;
-
+		[Header("PickUpImageComponents")]
 		[SerializeField]
 		private Image Player1PickupImage;
 		[SerializeField]
@@ -34,6 +34,11 @@ namespace WaterSumo
 		private Image Player3PickupImage;
 		[SerializeField]
 		private Image Player4PickupImage;
+		[Header("WinScreen")]
+		[SerializeField]
+		public GameObject WinScreen;
+		[SerializeField]
+		public Image WinPlayerImage;
 
 		void Start()
 		{

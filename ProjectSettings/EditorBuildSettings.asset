@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/WaterSumo/Scenes/Levels/FreeForAll.unity
+    path: Assets/WaterSumo/Scenes/MainMenu.unity
+  - enabled: 1
+    path: Assets/WaterSumo/Scenes/CharacterSelection.unity
   - enabled: 1
     path: Assets/WaterSumo/Scenes/Levels/Rectangle.unity
+  - enabled: 1
+    path: Assets/WaterSumo/Scenes/Levels/FreeForAll.unity

@@ -62,7 +62,7 @@ namespace WaterSumo
 		bool IsCloseToBounds = false;
 		bool IsBump = false;
 		bool IsUsePickup = false;
-		bool IsShuting = false;
+		bool IsShouting = false;
 		//Emogis Sprite
 		[SerializeField]
 		private Sprite IsCloseToBoundsSprite;
@@ -149,7 +149,7 @@ namespace WaterSumo
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
 
 			if (Input.GetButtonDown(InputXString))
-				Shuting();
+				Shouting();
 
 			if (Input.GetButtonDown(InputAString))
 				ActivatePowerUp();
@@ -170,9 +170,11 @@ namespace WaterSumo
 					PlayerRigidbody.velocity = PlayerRigidbody.velocity.normalized * MaxInputVelocity;
 			}
 		}
-		private void Shuting()
+		private void Shouting()
 		{
-			IsShuting = true;
+			///////////////////////////////////////////// Sound shouting
+
+			IsShouting = true;
 			TimeToResetIsShuting = Time.time + ResetTimeShuting;
 		}
 		private void ActivatePowerUp()
@@ -199,7 +201,7 @@ namespace WaterSumo
 				SetEmogi(IsRigdingWaveSprite);
 			else if(IsUsePickup)
 				SetEmogi(IsUsePickupSprite);
-			else if(IsShuting)
+			else if(IsShouting)
 				SetEmogi(IsShutingSprite);
 			else
 				SetEmogi(IdleSprite);
@@ -211,8 +213,8 @@ namespace WaterSumo
 				IsBump = false;
 			if (IsUsePickup && TimeToResetIsUsePickup <= Time.time)
 				IsUsePickup = false;
-			if (IsShuting && TimeToResetIsShuting <= Time.time)
-				IsShuting = false;
+			if (IsShouting && TimeToResetIsShuting <= Time.time)
+				IsShouting = false;
 		}
 		private void SetEmogi(Sprite _sprite)
 		{
@@ -224,6 +226,8 @@ namespace WaterSumo
 
 		private void OnCollisionEnter(Collision _coll)
 		{
+			///////////////////////////////////////////// Sound Collison
+
 			IsBump = true;
 			TimeToResetIsBump = Time.time + ResetTimeBump;
 		}

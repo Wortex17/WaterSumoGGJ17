@@ -52,6 +52,7 @@ namespace WaterSumo
 		[HideInInspector]
 		public int PlayerArePlaying = 0;
 		private bool IsGameStartet = false;
+		private bool IsGameOver= false;
 
 		private void Awake()
 		{
@@ -77,30 +78,35 @@ namespace WaterSumo
 
 		private void Update()
 		{
+
 			if (IsGameStartet && PlayerArePlaying <= 1)
 				GameOver();
+			if (IsGameOver && Input.GetButtonDown("ControllerStart"))
+				BackToSelectMenu();
 		}
 
 		private void OnLevelLoaded(Scene _actualScene, LoadSceneMode _loadSceneMode)
 		{
 			switch (_actualScene.name)
 			{
-				case "MaineMenu":
-					PlayerDatas[0].IsLoggedIn = true;
+				case "MainMenu":
+					PlayerDatas[0].IsLoggedIn = false;
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
 					PlayerArePlaying = 0;
 					IsGameStartet = false;
+					IsGameOver = false;
 					PlayMusic(MenuMusic);
 					break;
 				case "CharacterSelection":
-					PlayerDatas[0].IsLoggedIn = true;
+					PlayerDatas[0].IsLoggedIn = false;
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
 					PlayerArePlaying = 0;
 					IsGameStartet = false;
+					IsGameOver = false;
 					PlayMusic(MenuMusic);
 					break;
 				default:
@@ -148,6 +154,7 @@ namespace WaterSumo
 		{
 			if (!PlayerDatas[(int)_playerId].IsLoggedIn)
 				return;
+			PlayerArePlaying++;
 
 			int spawnPointId = -1;
 			do
@@ -170,7 +177,7 @@ namespace WaterSumo
 		{
 			GameObject newHUD = Instantiate(HUDPrefab, new Vector3(9000.0f, 9000.0f, 9000.0f), Quaternion.identity);
 			HUDInstanz = newHUD.GetComponentInChildren<HUD>();
-			
+
 			if (PlayerDatas[0].IsLoggedIn)
 			{
 				HUDInstanz.SetEnableCharacter(PlayerId.Player1, true);
@@ -196,7 +203,19 @@ namespace WaterSumo
 
 		private void GameOver()
 		{
-			Debug.Log("GameOver");
+			if (!IsGameOver)
+			{
+				HUDInstanz.WinScreen.SetActive(true);
+				PlayerId playerId = GameObject.FindObjectOfType<PlayerController>().PlayerIdType;
+				int imageId = PlayerDatas[(int)playerId].MaterialId;
+				HUDInstanz.WinPlayerImage.sprite = CharacterSprite[imageId];
+				IsGameOver = true;
+			}
+		}
+
+		private void BackToSelectMenu()
+		{
+			SceneManager.LoadScene(1);
 		}
 	}
 }

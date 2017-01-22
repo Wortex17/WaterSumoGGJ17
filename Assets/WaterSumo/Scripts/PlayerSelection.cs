@@ -51,7 +51,7 @@ namespace WaterSumo
 	
 		void DetectPlayers(string _inputA, string _inputB, int _arrayIndex)
 		{
-			if (Input.GetButtonDown (_inputA))
+			if (Input.GetButtonDown (_inputA) && !IsPlayerConnected[_arrayIndex])
 				{
 				IsPlayerConnected [_arrayIndex] = true;
 				PlayerPortraits [_arrayIndex].enabled = true;
@@ -120,18 +120,18 @@ namespace WaterSumo
 
 		void Levelselect()
 		{
-			LevelNameDisplay.text = LevelNames [LevelID];
+			LevelNameDisplay.text = "Level: " + LevelNames [LevelID];
 			if (Input.GetButtonDown ("ControllerRB"))
 			{
 				LevelID++;
-				if(LevelID == 2)
+				if(LevelID == LevelNames.Length)
 					LevelID = 0;
 			}
 			if (Input.GetButtonDown ("ControllerLB"))
 			{
 				LevelID--;
 				if(LevelID == -1)
-					LevelID = 1;
+					LevelID = LevelNames.Length - 1;
 			}
 		}
 
