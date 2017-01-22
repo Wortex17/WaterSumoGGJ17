@@ -148,10 +148,10 @@ namespace WaterSumo
 		{
 			HandleMovement(Input.GetAxis(InputUpString), Input.GetAxis(InputRightString));
 
-			if (Input.GetButtonDown(InputXString))
-				Shouting();
+            if (Input.GetButtonDown(InputXString) || Input.GetButtonDown(InputBString))
+                Shouting();
 
-			if (Input.GetButtonDown(InputAString))
+            if (Input.GetButtonDown(InputAString))
 				ActivatePowerUp();
 
 		}

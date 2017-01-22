@@ -19,13 +19,18 @@ namespace WaterSumo
 
         public float CurrentLifetime01 {  get { return Mathf.InverseLerp(0f, maxLifetime, currentLifetime); } }
 
+        public float OverallStrength
+        {
+            get { return overallStrength; }
+            set { overallStrength = value; }
+        }
+
         public void Reset()
         {
             currentSize = 0f;
             currentLifetime = 0f;
 
         }
-
 
         private void Progress(float grow)
         {
@@ -115,7 +120,7 @@ namespace WaterSumo
             Progress(Time.deltaTime);
             var colliders = Physics.OverlapSphere(transform.position, RadiusCurrent, layerMask);
             
-            float strength = pushStrengthFactor * pushStrengthOverLifetime.Evaluate(CurrentLifetime01);
+            float strength = overallStrength * pushStrengthFactor * pushStrengthOverLifetime.Evaluate(CurrentLifetime01);
 
             foreach (var collider in colliders)
             {
@@ -197,6 +202,8 @@ namespace WaterSumo
         private float maxSize = 1f;
         [SerializeField]
         private float maxLifetime = 1f;
+
+        private float overallStrength = 1f;
 
         [SerializeField, Range(0f, 1f)]
         private float waveLength = 0.2f;

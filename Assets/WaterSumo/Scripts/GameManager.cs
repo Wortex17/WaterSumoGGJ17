@@ -49,10 +49,17 @@ namespace WaterSumo
 		private Sprite[] CharacterSprite;
 
 		//GameStats
+	    public int PlayersArePlaying
+	    {
+	        get {  return playersArePlaying; }
+            set { playersArePlaying = value; }
+	    }
 		[HideInInspector]
-		public int PlayerArePlaying = 0;
+		private int playersArePlaying = 0;
 		private bool IsGameStartet = false;
 		private bool IsGameOver= false;
+
+	    public bool IsDebugEndless = false;
 
 		private void Awake()
 		{
@@ -79,7 +86,7 @@ namespace WaterSumo
 		private void Update()
 		{
 
-			if (IsGameStartet && PlayerArePlaying <= 1)
+			if (!IsDebugEndless && IsGameStartet && playersArePlaying <= 1)
 				GameOver();
 			if (IsGameOver && Input.GetButtonDown("ControllerStart"))
 				BackToSelectMenu();
@@ -94,7 +101,7 @@ namespace WaterSumo
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
-					PlayerArePlaying = 0;
+					playersArePlaying = 0;
 					IsGameStartet = false;
 					IsGameOver = false;
 					PlayMusic(MenuMusic);
@@ -104,7 +111,7 @@ namespace WaterSumo
 					PlayerDatas[1].IsLoggedIn = false;
 					PlayerDatas[2].IsLoggedIn = false;
 					PlayerDatas[3].IsLoggedIn = false;
-					PlayerArePlaying = 0;
+					playersArePlaying = 0;
 					IsGameStartet = false;
 					IsGameOver = false;
 					PlayMusic(MenuMusic);
@@ -154,7 +161,7 @@ namespace WaterSumo
 		{
 			if (!PlayerDatas[(int)_playerId].IsLoggedIn)
 				return;
-			PlayerArePlaying++;
+			playersArePlaying++;
 
 			int spawnPointId = -1;
 			do

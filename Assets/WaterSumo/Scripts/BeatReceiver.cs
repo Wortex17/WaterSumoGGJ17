@@ -7,22 +7,22 @@ public abstract class BeatReceiver : MonoBehaviour
     public int ExpectedBeat {  get {  return localBeatCount + 1; } }
     public float PreviewBeat {  get { return GetBeatPreview();  } }
 
-    public void ReceiveBeat(int beat)
+    public void ReceiveBeat(int beat, float beatWeight)
     {
-        OnAnyBeat(beat);
+        OnAnyBeat(beat, beatWeight);
         if (beat != localBeatCount)
         {
-            OnBeat(beat);
+            OnBeat(beat, beatWeight);
             localBeatCount = beat;
         }
     }
 
-    protected virtual void OnBeat(int beat)
+    protected virtual void OnBeat(int beat, float beatWeight)
     {
 
     }
 
-    protected virtual void OnAnyBeat(int beat)
+    protected virtual void OnAnyBeat(int beat, float beatWeight)
     {
 
     }
